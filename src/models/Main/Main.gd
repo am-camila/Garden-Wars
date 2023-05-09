@@ -8,6 +8,7 @@ export var max_enemies = 10
 func _ready():
 	randomize()
 	$EnemiesTimer.start()
+	player.initialize(self, self)
 
 # Called every time the timer times out.
 func _on_EnemiesTimer_timeout():

@@ -17,7 +17,7 @@ func _ready():
 	fire_timer.connect("timeout", self, "fire_at_enemy")
 
 
-func initialize(container, player_pos, projectile_container):
+func initialize(container, projectile_container):
 	container.add_child(self)
 	#global_position = player_pos
 	self.projectile_container = projectile_container
