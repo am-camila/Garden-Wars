@@ -1,11 +1,15 @@
 extends KinematicBody2D
 
+class_name Enemy
 
 var player
+var max_health
+
 export var speed = 3500
+export var health = 100
 
 func _ready():
-	pass # Replace with function body.
+	max_health = health
 
 
 func set_values(player):
@@ -19,3 +23,10 @@ func _process(delta):
 	#if speed < 3000:
 	#	speed += delta * speed
 	move_and_slide(movement)
+
+
+
+func kill_enemy( damage):
+	max_health -= damage
+	if max_health < 1:
+		queue_free()
