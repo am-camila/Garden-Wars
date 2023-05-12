@@ -3,9 +3,8 @@ extends Node2D
 class_name Player
 
 export var speed = 400
-export var health = 4
-export var damage = 1
-
+export var health = 100
+export var damage = 25
 
 
 onready var fire_position = $FirePosition
@@ -23,8 +22,9 @@ var invulnerabilidad = false
 func _ready():
 	fire_timer.connect("timeout", self, "fire_at_enemy")
 	max_health = health
-	$TextoVida.hide()
-	$TextoVida.text = str(max_health)
+	$LifePoints.max_value = health
+	$LifePoints.hide()
+	$LifePoints.value = max_health
 
 
 func initialize(container, projectile_container):
@@ -68,10 +68,9 @@ func _on_FireArea_body_exited(body):
 
 func _on_HitArea_body_entered(body):
 	if body is Enemy: #&& !invulnerabilidad:
-		max_health -= damage
-		$TextoVida.text = str(max_health)
-		$TextoVida.show()
+		max_health -= body.damage
+		$LifePoints.value = max_health
+		$LifePoints.show()
 		#agregar invulnerabilidad por 2 o 3 segundos para que no pueda volver a recibir un hit en ese tiempo
 		if max_health < 1:
 			queue_free()
-			##gameOver() funcion que termina la partida

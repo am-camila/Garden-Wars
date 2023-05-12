@@ -34,13 +34,12 @@ collision_mask = 2
 position = Vector2( 0, -0.5 )
 shape = SubResource( 2 )
 
-[node name="TextoVida" type="Label" parent="."]
+[node name="LifePoints" type="ProgressBar" parent="."]
 margin_left = -20.0
 margin_top = -52.0
 margin_right = 20.0
 margin_bottom = -38.0
-text = "3"
-align = 1
+percent_visible = false
 
 [connection signal="body_entered" from="FireArea" to="." method="_on_FireArea_body_entered"]
 [connection signal="body_exited" from="FireArea" to="." method="_on_FireArea_body_exited"]

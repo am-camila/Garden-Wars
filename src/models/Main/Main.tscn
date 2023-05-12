@@ -1,13 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://models/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://models/Enemy/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://models/Main/Main.gd" type="Script" id=3]
+[ext_resource path="res://fonts/ariblk.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 1024, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0 )
 }
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 4 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
@@ -21,6 +30,26 @@ curve = SubResource( 1 )
 [node name="EnemiesPathLocation" type="PathFollow2D" parent="EnemiesPath"]
 
 [node name="EnemiesTimer" type="Timer" parent="."]
-wait_time = 0.5
+
+[node name="TimerText" type="Label" parent="."]
+margin_left = 815.0
+margin_top = 10.0
+margin_right = 1025.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 2 )
+
+[node name="PlayWaveTimer" type="Timer" parent="."]
+
+[node name="NumberWaveTimer" type="Timer" parent="."]
+
+[node name="NumberWave" type="Label" parent="NumberWaveTimer"]
+margin_left = 271.0
+margin_top = 130.0
+margin_right = 693.0
+margin_bottom = 182.0
+custom_fonts/font = SubResource( 3 )
+align = 1
 
 [connection signal="timeout" from="EnemiesTimer" to="." method="_on_EnemiesTimer_timeout"]
+[connection signal="timeout" from="PlayWaveTimer" to="." method="_on_PlayWaveTimer_timeout"]
+[connection signal="timeout" from="NumberWaveTimer" to="." method="_on_NumberWaveTimer_timeout"]

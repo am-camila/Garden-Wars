@@ -5,15 +5,17 @@ class_name Enemy
 var player
 var max_health
 
+
+
 export var speed = 3500
-export var health = 30
-export var damage = 15
+export var health = 50
+export var damage = 25
 
 func _ready():
+	$LifeBar.max_value = health
 	max_health = health
-	$TextoVida.hide()
-	$TextoVida.text = str(max_health)
-
+	$LifeBar.hide()
+	$LifeBar.value = max_health
 
 func set_values(player):
 	self.player = player
@@ -30,17 +32,12 @@ func _process(delta):
 
 
 
-#func kill_enemy(damage):
-#	max_health -= damage
-#	if max_health < 1:
-#		queue_free()
-
-
 func _on_Area2D_body_entered(body):
 	if body is Projectile:
-		print(body)
-		max_health -= damage
-		$TextoVida.text = str(max_health)
-		$TextoVida.show()
+		max_health -= player.damage
+		$LifeBar.value = max_health
+		$LifeBar.show()
 		if max_health < 1:
 			queue_free()
+
+
