@@ -29,10 +29,15 @@ var time_current_wave = 0
 
 
 func _ready():
+	randomize()
+	
+func new_game():
 	time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
 	player.initialize(self, self)
-	see_wave_text()
-	
+	see_wave_text()	
+	$HUD.show_message("Get Ready")
+
+
 
 # Timer que spawnea los enemigos en cada oleada
 func _on_EnemiesTimer_timeout():
