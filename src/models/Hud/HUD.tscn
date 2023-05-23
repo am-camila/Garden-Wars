@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://models/Hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Lobster-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/songs/Menu_music_theme.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/img/menu.jpg" type="Texture" id=4]
 [ext_resource path="res://fonts/Debug.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://models/Hud/Settings.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 37
@@ -53,6 +54,7 @@ custom_fonts/font = SubResource( 1 )
 [node name="HubTheme" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
+bus = "Music"
 
 [node name="Title" type="Label" parent="."]
 margin_left = 321.0
@@ -87,9 +89,11 @@ custom_constants/separation = -15
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 margin_right = 129.0
 margin_bottom = 53.0
+focus_mode = 0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.713726, 0.533333, 0.0352941, 1 )
 custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
 text = "Start"
 flat = true
 icon_align = 1
@@ -98,9 +102,11 @@ icon_align = 1
 margin_top = 38.0
 margin_right = 129.0
 margin_bottom = 91.0
+focus_mode = 0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.713726, 0.533333, 0.0352941, 1 )
 custom_fonts/font = SubResource( 5 )
+enabled_focus_mode = 0
 text = "Settings"
 flat = true
 icon_align = 1
@@ -109,13 +115,18 @@ icon_align = 1
 margin_top = 76.0
 margin_right = 129.0
 margin_bottom = 129.0
+focus_mode = 0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.713726, 0.533333, 0.0352941, 1 )
 custom_fonts/font = SubResource( 2 )
+enabled_focus_mode = 0
 text = "Exit"
 flat = true
 icon_align = 1
 
+[node name="Settings" parent="." instance=ExtResource( 6 )]
+
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

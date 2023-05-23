@@ -39,6 +39,12 @@ config/icon="res://icon.png"
 [autoload]
 
 GLOBALS="*res://globals/Globals.gd"
+SETTINGS="*res://globals/settings/Settings.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [gui]
 

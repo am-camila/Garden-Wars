@@ -38,3 +38,7 @@ func _on_MessageTimer_timeout():
 
 func _on_ExitButton_pressed():
 	get_tree().quit()
+
+
+func _on_SettingsButton_pressed():
+	$Settings.popup_centered()

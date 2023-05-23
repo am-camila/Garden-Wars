@@ -31,13 +31,19 @@ var time_current_wave = 0
 func _ready():
 	randomize()
 	$ExpBar.hide()
-	
+
+
+
+
 func new_game():
 	$ExpBar.show()
 	time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
 	player.initialize(self, self)
 	see_wave_text()	
 	$HUD.show_message("Get Ready")
+
+
+
 
 
 

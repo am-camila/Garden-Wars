@@ -1,0 +1,337 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://fonts/Debug.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://models/Hud/Settings.gd" type="Script" id=2]
+[ext_resource path="res://fonts/ariblk.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 27
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 3 )
+
+[node name="Settings" type="Popup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -344.5
+margin_top = -264.0
+margin_right = 344.5
+margin_bottom = 264.0
+popup_exclusive = true
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 83.0
+margin_top = -13.0
+margin_right = -75.0
+margin_bottom = 29.0
+color = Color( 0.376471, 0.4, 0.392157, 1 )
+
+[node name="TabsSettings" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 86.5
+margin_top = -14.0
+margin_right = -78.5
+margin_bottom = 22.0
+tab_align = 0
+
+[node name="General" type="Tabs" parent="TabsSettings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_align = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabsSettings/General"]
+margin_left = 33.0
+margin_top = 31.0
+margin_right = 487.0
+margin_bottom = 524.0
+
+[node name="VideoContainer" type="GridContainer" parent="TabsSettings/General/MarginContainer"]
+margin_right = 454.0
+margin_bottom = 493.0
+columns = 2
+
+[node name="DisplayLabel2" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_right = 224.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 1 )
+text = "Display
+"
+
+[node name="DisplayB" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 10.0
+margin_right = 454.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+
+[node name="Mode" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 43.0
+margin_right = 224.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 2 )
+text = "Screen Mode"
+
+[node name="ModeOption" type="OptionButton" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 358.0
+margin_top = 43.0
+margin_right = 454.0
+margin_bottom = 68.0
+size_flags_horizontal = 10
+text = "Windowed"
+items = [ "Windowed", null, false, 0, null, "FullScreen", null, false, 1, null ]
+selected = 0
+
+[node name="Bringhtness" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 72.0
+margin_right = 224.0
+margin_bottom = 97.0
+custom_fonts/font = SubResource( 2 )
+text = "Bringhtness"
+
+[node name="GeneralVolumen2" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 72.0
+margin_right = 454.0
+margin_bottom = 97.0
+
+[node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2"]
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 19.0
+text = "min"
+
+[node name="BringhtnessBar" type="HSlider" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2"]
+margin_left = 29.0
+margin_right = 195.0
+margin_bottom = 25.0
+size_flags_horizontal = 11
+size_flags_vertical = 1
+min_value = -50.0
+max_value = 0.0
+value = -15.0
+rounded = true
+
+[node name="Max" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2"]
+margin_left = 199.0
+margin_top = 5.0
+margin_right = 226.0
+margin_bottom = 19.0
+text = "max"
+align = 2
+valign = 1
+
+[node name="VolumenLabel" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 101.0
+margin_right = 224.0
+margin_bottom = 182.0
+custom_fonts/font = SubResource( 1 )
+text = "
+
+Audio
+"
+
+[node name="volumenB" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 132.0
+margin_right = 454.0
+margin_bottom = 150.0
+custom_fonts/font = SubResource( 1 )
+
+[node name="Sound" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 186.0
+margin_right = 224.0
+margin_bottom = 211.0
+custom_fonts/font = SubResource( 2 )
+text = "General"
+
+[node name="GeneralVolumen" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 186.0
+margin_right = 454.0
+margin_bottom = 211.0
+
+[node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen"]
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 19.0
+text = "min"
+
+[node name="GeneralBar" type="HSlider" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen"]
+margin_left = 29.0
+margin_right = 195.0
+margin_bottom = 25.0
+size_flags_horizontal = 11
+size_flags_vertical = 1
+min_value = -50.0
+max_value = 0.0
+value = -15.0
+rounded = true
+
+[node name="Max" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen"]
+margin_left = 199.0
+margin_top = 5.0
+margin_right = 226.0
+margin_bottom = 19.0
+text = "max"
+align = 2
+valign = 1
+
+[node name="Music" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 215.0
+margin_right = 224.0
+margin_bottom = 240.0
+custom_fonts/font = SubResource( 2 )
+text = "Music"
+
+[node name="MusicVolumen" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 215.0
+margin_right = 454.0
+margin_bottom = 240.0
+
+[node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/MusicVolumen"]
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 19.0
+text = "min"
+
+[node name="MusicBar" type="HSlider" parent="TabsSettings/General/MarginContainer/VideoContainer/MusicVolumen"]
+margin_left = 29.0
+margin_right = 195.0
+margin_bottom = 25.0
+size_flags_horizontal = 11
+size_flags_vertical = 1
+min_value = -30.0
+max_value = 20.0
+value = -15.0
+rounded = true
+
+[node name="Max" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/MusicVolumen"]
+margin_left = 199.0
+margin_top = 5.0
+margin_right = 226.0
+margin_bottom = 19.0
+text = "max"
+align = 2
+valign = 1
+
+[node name="SFX" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 244.0
+margin_right = 224.0
+margin_bottom = 269.0
+custom_fonts/font = SubResource( 2 )
+text = "SFX"
+
+[node name="SfxVolumen" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 244.0
+margin_right = 454.0
+margin_bottom = 269.0
+
+[node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/SfxVolumen"]
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 19.0
+text = "min"
+
+[node name="SfxBar" type="HSlider" parent="TabsSettings/General/MarginContainer/VideoContainer/SfxVolumen"]
+margin_left = 29.0
+margin_right = 195.0
+margin_bottom = 25.0
+size_flags_horizontal = 11
+size_flags_vertical = 1
+min_value = -30.0
+max_value = 20.0
+value = -15.0
+rounded = true
+
+[node name="Max" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/SfxVolumen"]
+margin_left = 199.0
+margin_top = 5.0
+margin_right = 226.0
+margin_bottom = 19.0
+text = "max"
+align = 2
+valign = 1
+
+[node name="Gameplay label" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 273.0
+margin_right = 224.0
+margin_bottom = 354.0
+custom_fonts/font = SubResource( 1 )
+text = "
+
+Gameplay
+"
+
+[node name="Gameplay label2" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 304.0
+margin_right = 454.0
+margin_bottom = 322.0
+custom_fonts/font = SubResource( 1 )
+
+[node name="Blindness" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 365.0
+margin_right = 224.0
+margin_bottom = 390.0
+custom_fonts/font = SubResource( 2 )
+text = "Color Blindness Filter"
+
+[node name="BlindnessOption" type="CheckButton" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 358.0
+margin_right = 454.0
+margin_bottom = 398.0
+
+[node name="Vacio3" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 402.0
+margin_right = 224.0
+margin_bottom = 416.0
+
+[node name="Vacio4" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 402.0
+margin_right = 454.0
+margin_bottom = 416.0
+
+[node name="Save" type="Button" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 420.0
+margin_right = 224.0
+margin_bottom = 449.0
+custom_fonts/font = SubResource( 4 )
+text = "SAVE"
+
+[node name="Close" type="Button" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 420.0
+margin_right = 454.0
+margin_bottom = 449.0
+custom_fonts/font = SubResource( 5 )
+text = "CANCEL"
+
+[connection signal="item_selected" from="TabsSettings/General/MarginContainer/VideoContainer/ModeOption" to="." method="_on_ModeOption_item_selected"]
+[connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2/BringhtnessBar" to="." method="_on_BringhtnessBar_value_changed"]
+[connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen/GeneralBar" to="." method="_on_GeneralBar_value_changed"]
+[connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/MusicVolumen/MusicBar" to="." method="_on_MusicBar_value_changed"]
+[connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/SfxVolumen/SfxBar" to="." method="_on_SfxBar_value_changed"]
+[connection signal="pressed" from="TabsSettings/General/MarginContainer/VideoContainer/BlindnessOption" to="." method="_on_BlindnessOption_pressed"]
+[connection signal="pressed" from="TabsSettings/General/MarginContainer/VideoContainer/Close" to="." method="_on_Close_pressed"]
