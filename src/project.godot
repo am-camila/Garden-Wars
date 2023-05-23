@@ -36,6 +36,10 @@ config/name="Garden-Wars"
 run/main_scene="res://models/Main/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GLOBALS="*res://globals/Globals.gd"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

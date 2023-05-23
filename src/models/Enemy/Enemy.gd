@@ -38,6 +38,7 @@ func _on_Area2D_body_entered(body):
 		$LifeBar.value = max_health
 		$LifeBar.show()
 		if max_health < 1:
+			GLOBALS.emit_signal("enemy_die")
 			queue_free()
 
 
