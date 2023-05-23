@@ -2,6 +2,9 @@ extends CanvasLayer
 
 signal start_game
 
+func _ready():
+	$HubTheme.play()
+
 func show_message(text):
 	$Message.text = text
 	$Message.show()
@@ -20,6 +23,7 @@ func update_score(score):
 	$ScoreLabel.text = str(score)
 
 func _on_StartButton_pressed():
+	$HubTheme.stop()
 	$StartButton.hide()
 	emit_signal("start_game")
 	$Message.hide()

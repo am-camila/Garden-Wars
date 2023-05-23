@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://models/Hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Lobster-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/songs/Menu_music_theme.ogg" type="AudioStream" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -40,6 +41,10 @@ custom_fonts/font = SubResource( 1 )
 text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]
+
+[node name="HubTheme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
