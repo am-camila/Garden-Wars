@@ -7,16 +7,25 @@ export var health = 100
 export var damage = 25
 
 
+# Variables atributos del player
+var max_health
+var can_take_damage = true
+
+
 onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
 
+
 export (PackedScene) var projectile_scene
 
+
+# Variables para enemigos y disparar
+var enemies = []
 var target:KinematicBody2D
 var projectile:Sprite
 var projectile_container
-var max_health
-var invulnerabilidad = false
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,17 +37,24 @@ func _ready():
 
 
 func initialize(container, projectile_container):
-	#container.add_child(self)
-	#global_position = player_pos
 	self.projectile_container = projectile_container
 
 
 func fire_at_enemy():
-	var proj_instance = projectile_scene.instance()
-	proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(target.global_position))
+	if enemies.size() > 0:
+		var enem = enemies.front()
+		if !is_instance_valid(enem):
+			if enemies.size() > 0:
+				enemies.remove(0)
+				if enemies.size() > 0:
+					enem = enemies.front()
+		else:
+			var proj_instance = projectile_scene.instance()
+			proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(enem.global_position))	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
 func _process(delta):
 	var player_position = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
@@ -56,21 +72,26 @@ func _process(delta):
 	position += player_position * delta
 
 
+
 func _on_FireArea_body_entered(body):
 	if body is Enemy:
-		target = body
+		enemies.append(body)
 		fire_timer.start()
 
 
-func _on_FireArea_body_exited(body):
-	fire_timer.stop()
-
 
 func _on_HitArea_body_entered(body):
-	if body is Enemy: #&& !invulnerabilidad:
-		max_health -= body.damage
-		$LifePoints.value = max_health
-		$LifePoints.show()
-		#agregar invulnerabilidad por 2 o 3 segundos para que no pueda volver a recibir un hit en ese tiempo
-		if max_health < 1:
-			queue_free()
+	if body is Enemy:
+		if can_take_damage:
+			max_health -= body.damage
+			$LifePoints.value = max_health
+			$LifePoints.show()
+			can_take_damage = false
+			$LifeTimer.start()
+			if max_health < 1:
+				print("mori")
+				#get_tree().paused = true
+
+
+func _on_LifeTimer_timeout():
+	can_take_damage = true
