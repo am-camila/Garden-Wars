@@ -1,10 +1,7 @@
 extends Node
 
 
-#Signals
 
-signal brightness_changed(value)
-signal display_settings(value)
 
 
 func _ready():
@@ -16,9 +13,6 @@ func _ready():
 func change_display_mode(value):
 	OS.window_fullscreen = value
 
-
-func change_brightness(value):
-	emit_signal("brightness_changed",value)
 
 #Audio settings
 

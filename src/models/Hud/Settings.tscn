@@ -99,49 +99,10 @@ text = "Windowed"
 items = [ "Windowed", null, false, 0, null, "FullScreen", null, false, 1, null ]
 selected = 0
 
-[node name="Bringhtness" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 72.0
-margin_right = 224.0
-margin_bottom = 97.0
-custom_fonts/font = SubResource( 2 )
-text = "Bringhtness"
-
-[node name="GeneralVolumen2" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_left = 228.0
-margin_top = 72.0
-margin_right = 454.0
-margin_bottom = 97.0
-
-[node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2"]
-margin_top = 5.0
-margin_right = 25.0
-margin_bottom = 19.0
-text = "min"
-
-[node name="BringhtnessBar" type="HSlider" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2"]
-margin_left = 29.0
-margin_right = 195.0
-margin_bottom = 25.0
-size_flags_horizontal = 11
-size_flags_vertical = 1
-min_value = -50.0
-max_value = 0.0
-value = -15.0
-rounded = true
-
-[node name="Max" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2"]
-margin_left = 199.0
-margin_top = 5.0
-margin_right = 226.0
-margin_bottom = 19.0
-text = "max"
-align = 2
-valign = 1
-
 [node name="VolumenLabel" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 101.0
+margin_top = 72.0
 margin_right = 224.0
-margin_bottom = 182.0
+margin_bottom = 153.0
 custom_fonts/font = SubResource( 1 )
 text = "
 
@@ -150,23 +111,23 @@ Audio
 
 [node name="volumenB" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 132.0
+margin_top = 103.0
 margin_right = 454.0
-margin_bottom = 150.0
+margin_bottom = 121.0
 custom_fonts/font = SubResource( 1 )
 
 [node name="Sound" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 186.0
+margin_top = 157.0
 margin_right = 224.0
-margin_bottom = 211.0
+margin_bottom = 182.0
 custom_fonts/font = SubResource( 2 )
 text = "General"
 
 [node name="GeneralVolumen" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 186.0
+margin_top = 157.0
 margin_right = 454.0
-margin_bottom = 211.0
+margin_bottom = 182.0
 
 [node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen"]
 margin_top = 5.0
@@ -195,17 +156,17 @@ align = 2
 valign = 1
 
 [node name="Music" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 215.0
+margin_top = 186.0
 margin_right = 224.0
-margin_bottom = 240.0
+margin_bottom = 211.0
 custom_fonts/font = SubResource( 2 )
 text = "Music"
 
 [node name="MusicVolumen" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 215.0
+margin_top = 186.0
 margin_right = 454.0
-margin_bottom = 240.0
+margin_bottom = 211.0
 
 [node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/MusicVolumen"]
 margin_top = 5.0
@@ -234,17 +195,17 @@ align = 2
 valign = 1
 
 [node name="SFX" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 244.0
+margin_top = 215.0
 margin_right = 224.0
-margin_bottom = 269.0
+margin_bottom = 240.0
 custom_fonts/font = SubResource( 2 )
 text = "SFX"
 
 [node name="SfxVolumen" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 244.0
+margin_top = 215.0
 margin_right = 454.0
-margin_bottom = 269.0
+margin_bottom = 240.0
 
 [node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/SfxVolumen"]
 margin_top = 5.0
@@ -273,9 +234,9 @@ align = 2
 valign = 1
 
 [node name="Gameplay label" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 273.0
+margin_top = 244.0
 margin_right = 224.0
-margin_bottom = 354.0
+margin_bottom = 325.0
 custom_fonts/font = SubResource( 1 )
 text = "
 
@@ -284,52 +245,51 @@ Gameplay
 
 [node name="Gameplay label2" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 304.0
+margin_top = 275.0
 margin_right = 454.0
-margin_bottom = 322.0
+margin_bottom = 293.0
 custom_fonts/font = SubResource( 1 )
 
 [node name="Blindness" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 365.0
+margin_top = 336.0
 margin_right = 224.0
-margin_bottom = 390.0
+margin_bottom = 361.0
 custom_fonts/font = SubResource( 2 )
 text = "Color Blindness Filter"
 
 [node name="BlindnessOption" type="CheckButton" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 358.0
+margin_top = 329.0
 margin_right = 454.0
-margin_bottom = 398.0
+margin_bottom = 369.0
 
 [node name="Vacio3" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 402.0
+margin_top = 373.0
 margin_right = 224.0
-margin_bottom = 416.0
+margin_bottom = 387.0
 
 [node name="Vacio4" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 402.0
+margin_top = 373.0
 margin_right = 454.0
-margin_bottom = 416.0
+margin_bottom = 387.0
 
 [node name="Save" type="Button" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 420.0
+margin_top = 391.0
 margin_right = 224.0
-margin_bottom = 449.0
+margin_bottom = 420.0
 custom_fonts/font = SubResource( 4 )
 text = "SAVE"
 
 [node name="Close" type="Button" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 420.0
+margin_top = 391.0
 margin_right = 454.0
-margin_bottom = 449.0
+margin_bottom = 420.0
 custom_fonts/font = SubResource( 5 )
 text = "CANCEL"
 
 [connection signal="item_selected" from="TabsSettings/General/MarginContainer/VideoContainer/ModeOption" to="." method="_on_ModeOption_item_selected"]
-[connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2/BringhtnessBar" to="." method="_on_BringhtnessBar_value_changed"]
 [connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen/GeneralBar" to="." method="_on_GeneralBar_value_changed"]
 [connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/MusicVolumen/MusicBar" to="." method="_on_MusicBar_value_changed"]
 [connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/SfxVolumen/SfxBar" to="." method="_on_SfxBar_value_changed"]

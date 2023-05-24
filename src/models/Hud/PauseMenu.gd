@@ -1,12 +1,13 @@
 extends CanvasLayer
 
-onready var settings = $Settings
 
+onready var settings = $Settings
 
 signal display_settings
 
 func _ready():
 	pass
+
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -24,4 +25,5 @@ func _on_SettingsButton_pressed():
 
 
 func _on_MainMenuButton_pressed():
-	get_tree().change_scene("res://models/Main/Main.tscn")
+	print("Ir a main menu")
+	#get_tree().change_scene("res://models/Main/Main.tscn")

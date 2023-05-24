@@ -4,7 +4,6 @@ extends Popup
 
 #Video Settings
 onready var mode_btn = $TabsSettings/General/MarginContainer/VideoContainer/ModeOption
-onready var bringhtness_btn = $TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen2/BringhtnessBar
 
 #Audio Settings
 onready var genera_bar = $TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen/GeneralBar
@@ -20,12 +19,6 @@ func _ready():
 
 func _on_ModeOption_item_selected(index):
 	SETTINGS.change_display_mode(index)
-
-
-
-func _on_BringhtnessBar_value_changed(value):
-	print("cambie a "+str(value))
-
 
 
 func _on_GeneralBar_value_changed(value):

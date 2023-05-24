@@ -30,6 +30,8 @@ var projectile_container
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fire_timer.connect("timeout", self, "fire_at_enemy")
+	GLOBALS.connect("hit",self,"_on_hit_enemy")
+	GLOBALS.connect("wave_end",self,"_on_wave_end")
 	max_health = health
 	$LifePoints.max_value = health
 	$LifePoints.hide()
@@ -41,6 +43,8 @@ func initialize(container, projectile_container):
 
 
 func fire_at_enemy():
+	if enemies.size() == 0:
+		fire_timer.stop()
 	if enemies.size() > 0:
 		var enem = enemies.front()
 		if !is_instance_valid(enem):
@@ -50,10 +54,21 @@ func fire_at_enemy():
 					enem = enemies.front()
 		else:
 			var proj_instance = projectile_scene.instance()
+			var num_rand = randi() % 2
+			if num_rand:
+				$Fire1Audio.play()
+			else:
+				$Fire2Audio.play()
 			proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(enem.global_position))	
 
 
+func _on_wave_end():
+	$Fire1Audio.stop()
+	$Fire2Audio.stop()
 
+func _on_hit_enemy():
+	$Fire1Audio.stop()
+	$Fire2Audio.stop()
 
 func _process(delta):
 	var player_position = Vector2.ZERO

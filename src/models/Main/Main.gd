@@ -3,6 +3,7 @@ extends Node
 export var enemy_scene: PackedScene
 onready var player = $Player
 
+
 #lista que contiene a todos los enemigos generados
 var enemies = []
 
@@ -34,16 +35,12 @@ func _ready():
 
 
 
-
 func new_game():
-	$ExpBar.show()
+	#$ExpBar.show()
 	time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
 	player.initialize(self, self)
 	see_wave_text()	
 	$HUD.show_message("Get Ready")
-
-
-
 
 
 
@@ -98,6 +95,7 @@ func _on_NumberWaveTimer_timeout():
 
 
 func deleteEnemies():
+	GLOBALS.emit_signal("wave_end")
 	for enemy in enemies:
 		if is_instance_valid(enemy):
 			enemy.queue_free()

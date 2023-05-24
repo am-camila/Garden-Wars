@@ -6,7 +6,6 @@ var player
 var max_health
 
 
-
 export var speed = 3500
 export var health = 50
 export var damage = 25
@@ -37,8 +36,13 @@ func _on_Area2D_body_entered(body):
 		max_health -= player.damage
 		$LifeBar.value = max_health
 		$LifeBar.show()
+		GLOBALS.emit_signal("hit")
 		if max_health < 1:
 			GLOBALS.emit_signal("enemy_die")
 			queue_free()
+
+
+
+
 
 
