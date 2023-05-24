@@ -15,6 +15,7 @@ func initialize(container, spawn_position:Vector2, direction:Vector2):
 	lifetime_timer.connect("timeout", self, "_on_lifetime_timer_timeout")
 	lifetime_timer.start()
 
+
 func _physics_process(delta):
 	position += direction * VELOCITY * delta
 

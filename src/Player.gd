@@ -80,11 +80,22 @@ func _process(delta):
 		player_position.y += 1
 	if Input.is_action_pressed("move_up"):
 		player_position.y -= 1
+	
+	if Input.is_action_just_pressed("special_attack"):
+		if max_health > 25:
+			_special_fire()
+			max_health -= 25
+			$LifePoints.value = max_health
+			$LifePoints.show()
+		if max_health == 25:
+			$CancelSpecialFire.play()
 		
 	if player_position.length() > 0:
 		player_position = player_position.normalized() * speed 
 			
 	position += player_position * delta
+	
+	check_health()
 
 
 
@@ -103,10 +114,33 @@ func _on_HitArea_body_entered(body):
 			$LifePoints.show()
 			can_take_damage = false
 			$LifeTimer.start()
-			if max_health < 1:
-				print("mori")
+			
 				#get_tree().paused = true
 
 
+func check_health():
+	if max_health < 1:
+				print("mori")
+
 func _on_LifeTimer_timeout():
 	can_take_damage = true
+
+
+func _special_fire():
+			var proj_N = projectile_scene.instance()
+			var proj_S = projectile_scene.instance()
+			var proj_E = projectile_scene.instance()
+			var proj_O = projectile_scene.instance()
+			
+			proj_N.set_scale(Vector2(4,4))
+			proj_S.set_scale(Vector2(4,4))
+			proj_E.set_scale(Vector2(4,4))
+			proj_O.set_scale(Vector2(4,4))	
+			
+			var glob = fire_position.global_position
+			proj_N.initialize(projectile_container, fire_position.global_position, glob.direction_to(fire_position.global_position+(Vector2(0,10))))
+			proj_S.initialize(projectile_container, fire_position.global_position, glob.direction_to(fire_position.global_position+(Vector2(0,-10))))
+			proj_E.initialize(projectile_container, fire_position.global_position, glob.direction_to(fire_position.global_position+(Vector2(10,0))))
+			proj_O.initialize(projectile_container, fire_position.global_position, glob.direction_to(fire_position.global_position+(Vector2(-10,0))))
+			$SpecialFire.play()
+	
