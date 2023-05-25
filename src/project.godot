@@ -19,15 +19,27 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player.gd"
 }, {
+"base": "Node2D",
+"class": "PowerUp",
+"language": "GDScript",
+"path": "res://PowerUp.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://Projectile.gd"
+}, {
+"base": "PowerUp",
+"class": "SpeedPowerUp",
+"language": "GDScript",
+"path": "res://models/PowerUps/SpeedPowerUp.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "Player": "",
-"Projectile": ""
+"PowerUp": "",
+"Projectile": "",
+"SpeedPowerUp": ""
 }
 
 [application]

@@ -26,7 +26,6 @@ func _physics_process(delta):
 func _on_lifetime_timer_timeout():
 	_remove()
 
-func _remove():	
+func _remove():
 	get_parent().remove_child(self)
 	queue_free()
-	

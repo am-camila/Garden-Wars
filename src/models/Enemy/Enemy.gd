@@ -5,8 +5,8 @@ class_name Enemy
 var player
 var max_health
 
-
-
+export (PackedScene) var powerUpScene
+export var powerupChance: float
 export var speed = 3500
 export var health = 50
 export var damage = 25
@@ -38,6 +38,11 @@ func _on_Area2D_body_entered(body):
 		$LifeBar.value = max_health
 		$LifeBar.show()
 		if max_health < 1:
+			#if randf()*100 <= powerupChance:
+			var powerUp = powerUpScene.instance()
+			powerUp.position = position
+			powerUp.connect("collected", self, "_on_powerup_collected")
+			get_parent().add_child(powerUp)
 			queue_free()
 
 
