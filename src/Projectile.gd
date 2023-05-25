@@ -8,9 +8,9 @@ export (float) var VELOCITY:float = 400.0
 
 var direction:Vector2
 
-func initialize(container, spawn_position:Vector2, direction:Vector2):
+func initialize(container, spawn_position:Vector2, direction2:Vector2):
 	container.add_child(self)
-	self.direction = direction
+	self.direction = direction2
 	global_position = spawn_position
 	lifetime_timer.connect("timeout", self, "_on_lifetime_timer_timeout")
 	lifetime_timer.start()

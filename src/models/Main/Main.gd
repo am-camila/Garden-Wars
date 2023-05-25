@@ -30,6 +30,7 @@ var time_current_wave = 0
 
 
 func _ready():
+	SAVE.load_data()
 	randomize()
 	$ExpBar.hide()
 

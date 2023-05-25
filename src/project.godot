@@ -40,6 +40,7 @@ config/icon="res://icon.png"
 
 GLOBALS="*res://globals/Globals.gd"
 SETTINGS="*res://globals/settings/Settings.gd"
+SAVE="*res://globals/Save.gd"
 
 [display]
 
@@ -49,6 +50,7 @@ window/stretch/aspect="keep"
 [global]
 
 audio=false
+rcedit=true
 
 [gui]
 

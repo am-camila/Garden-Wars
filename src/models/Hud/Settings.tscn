@@ -141,8 +141,8 @@ margin_right = 195.0
 margin_bottom = 25.0
 size_flags_horizontal = 11
 size_flags_vertical = 1
-min_value = -50.0
-max_value = 0.0
+min_value = -40.0
+max_value = 10.0
 value = -15.0
 rounded = true
 
@@ -180,8 +180,8 @@ margin_right = 195.0
 margin_bottom = 25.0
 size_flags_horizontal = 11
 size_flags_vertical = 1
-min_value = -30.0
-max_value = 20.0
+min_value = -40.0
+max_value = 10.0
 value = -15.0
 rounded = true
 
@@ -219,8 +219,8 @@ margin_right = 195.0
 margin_bottom = 25.0
 size_flags_horizontal = 11
 size_flags_vertical = 1
-min_value = -30.0
-max_value = 20.0
+min_value = -40.0
+max_value = 10.0
 value = -15.0
 rounded = true
 
@@ -294,4 +294,5 @@ text = "CANCEL"
 [connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/MusicVolumen/MusicBar" to="." method="_on_MusicBar_value_changed"]
 [connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/SfxVolumen/SfxBar" to="." method="_on_SfxBar_value_changed"]
 [connection signal="pressed" from="TabsSettings/General/MarginContainer/VideoContainer/BlindnessOption" to="." method="_on_BlindnessOption_pressed"]
+[connection signal="pressed" from="TabsSettings/General/MarginContainer/VideoContainer/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="TabsSettings/General/MarginContainer/VideoContainer/Close" to="." method="_on_Close_pressed"]

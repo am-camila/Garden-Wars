@@ -3,7 +3,6 @@ extends CanvasLayer
 
 onready var settings = $Settings
 
-signal display_settings
 
 func _ready():
 	pass
@@ -11,6 +10,7 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
+		$Settings.initialize_data()
 		visible = not visible
 		get_tree().paused = not get_tree().paused
 

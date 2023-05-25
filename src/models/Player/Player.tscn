@@ -53,7 +53,7 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 bus = "SFX"
 
-[node name="Fire2Audio" type="AudioStreamPlayer2D" parent="."]
+[node name="Fire2Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "SFX"
