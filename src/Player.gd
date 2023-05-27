@@ -11,17 +11,15 @@ onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
 
 export (PackedScene) var projectile_scene
-export (PackedScene) var powerUpScene
 
 var target:KinematicBody2D
 var projectile:Sprite
 var projectile_container
 var max_health
-var invulnerabilidad = false
+var invulnerabilty = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	powerUpScene.connect("collected", self, "_on_powerup_collected")
 	fire_timer.connect("timeout", self, "fire_at_enemy")
 	max_health = health
 	$LifePoints.max_value = health
@@ -66,7 +64,7 @@ func _on_FireArea_body_exited(body):
 	fire_timer.stop()
 
 func _on_HitArea_body_entered(body):
-	if body is Enemy: #&& !invulnerabilidad:
+	if body is Enemy: #&& !invulnerability:
 		max_health -= body.damage
 		$LifePoints.value = max_health
 		$LifePoints.show()
@@ -78,10 +76,10 @@ func increaseSpeed(duration, strength):
 	speed = speed * strength
 
 
-func _on_powerup_collected():
-	var powerUpClass = powerUpScene.powerUpClass
-	if powerUpClass == typeof(SpeedPowerUp):
-		increaseSpeed(5, 1.5)
+#func _on_powerup_collected():
+#	var powerUpClass = powerUpScene.powerUpClass
+#	if powerUpClass == typeof(SpeedPowerUp):
+#		increaseSpeed(5, 1.5)
 	#elif powerUpType == "immunity":
 	#    enableImmunity(7)  # Enable immunity for 7 seconds
    

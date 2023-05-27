@@ -41,8 +41,6 @@ func _on_Area2D_body_entered(body):
 			#if randf()*100 <= powerupChance:
 			var powerUp = powerUpScene.instance()
 			powerUp.position = position
-			powerUp.connect("collected", self, "_on_powerup_collected")
+			#powerUp.connect("collected", self, "_on_powerup_collected")
 			get_parent().add_child(powerUp)
 			queue_free()
-
-
