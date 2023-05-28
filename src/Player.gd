@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Player
 
-export var speed = 400
+export var speed = 500
 export var health = 100
 export var damage = 25
 
@@ -98,7 +98,6 @@ func _process(delta):
 	check_health()
 
 
-
 func _on_FireArea_body_entered(body):
 	if body is Enemy:
 		enemies.append(body)
@@ -144,3 +143,26 @@ func _special_fire():
 			proj_O.initialize(projectile_container, fire_position.global_position, glob.direction_to(fire_position.global_position+(Vector2(-10,0))))
 			$SpecialFire.play()
 	
+func _on_FireArea_body_exited(body):
+	fire_timer.stop()
+
+func _on_HitArea_body_entered(body):
+	if body is Enemy: #&& !invulnerability:
+		max_health -= body.damage
+		$LifePoints.value = max_health
+		$LifePoints.show()
+		#agregar invulnerabilidad por 2 o 3 segundos para que no pueda volver a recibir un hit en ese tiempo
+		if max_health < 1:
+			queue_free()
+
+func increaseSpeed(duration, strength):
+	speed = speed * strength
+
+
+#func _on_powerup_collected():
+#	var powerUpClass = powerUpScene.powerUpClass
+#	if powerUpClass == typeof(SpeedPowerUp):
+#		increaseSpeed(5, 1.5)
+	#elif powerUpType == "immunity":
+	#    enableImmunity(7)  # Enable immunity for 7 seconds
+   

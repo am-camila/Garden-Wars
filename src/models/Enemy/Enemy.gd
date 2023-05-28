@@ -5,7 +5,6 @@ class_name Enemy
 var player
 var max_health
 
-
 export var speed = 3500
 export var health = 50
 export var damage = 25
