@@ -117,6 +117,7 @@ func _on_HitArea_body_entered(body):
 				#get_tree().paused = true
 
 
+
 func check_health():
 	if max_health < 1:
 				print("mori")
@@ -146,14 +147,6 @@ func _special_fire():
 func _on_FireArea_body_exited(body):
 	fire_timer.stop()
 
-func _on_HitArea_body_entered(body):
-	if body is Enemy: #&& !invulnerability:
-		max_health -= body.damage
-		$LifePoints.value = max_health
-		$LifePoints.show()
-		#agregar invulnerabilidad por 2 o 3 segundos para que no pueda volver a recibir un hit en ese tiempo
-		if max_health < 1:
-			queue_free()
 
 func increaseSpeed(duration, strength):
 	speed = speed * strength

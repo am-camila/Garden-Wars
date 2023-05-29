@@ -4,8 +4,8 @@
 [ext_resource path="res://models/PowerUps/SpeedPowerUp.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 24 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 29.1076
 
 [node name="PowerUp" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,7 +26,6 @@ texture = ExtResource( 3 )
 
 [node name="Node2D" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
 shape = SubResource( 1 )
