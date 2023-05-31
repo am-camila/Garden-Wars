@@ -1,10 +1,13 @@
-extends Node2D
+extends KinematicBody2D
 
 class_name Player
 
-export var speed = 400
+export var speed = 500
 export var health = 100
 export var damage = 25
+
+var velocity : Vector2
+var direction : Vector2
 
 
 # Variables atributos del player
@@ -25,6 +28,8 @@ var target:KinematicBody2D
 var projectile:Sprite
 var projectile_container
 
+
+# Variables para el limite del mapa
 
 
 # Called when the node enters the scene tree for the first time.
@@ -71,15 +76,10 @@ func _on_hit_enemy():
 	$Fire2Audio.stop()
 
 func _process(delta):
-	var player_position = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		player_position.x += 1
-	if Input.is_action_pressed("move_left"):
-		player_position.x -= 1
-	if Input.is_action_pressed("move_down"):
-		player_position.y += 1
-	if Input.is_action_pressed("move_up"):
-		player_position.y -= 1
+	velocity.x = direction.x * speed
+	velocity.y = direction.y * speed
+	
+	velocity = move_and_slide(velocity)
 	
 	if Input.is_action_just_pressed("special_attack"):
 		if max_health > 25:
@@ -90,13 +90,27 @@ func _process(delta):
 		if max_health == 25:
 			$CancelSpecialFire.play()
 		
-	if player_position.length() > 0:
-		player_position = player_position.normalized() * speed 
+#	if player_position.length() > 0:
+#		player_position = player_position.normalized() * speed 
 			
-	position += player_position * delta
+#	position += player_position * delta
 	
 	check_health()
+	
 
+
+func _input(event):
+	direction = Vector2.ZERO
+	if Input.is_action_pressed("move_right"):
+		direction.x = 1
+	if Input.is_action_pressed("move_left"):
+		direction.x = -1
+	if Input.is_action_pressed("move_down"):
+		direction.y = 1
+	if Input.is_action_pressed("move_up"):
+		direction.y = -1
+	
+	direction = direction.normalized()
 
 
 func _on_FireArea_body_entered(body):
