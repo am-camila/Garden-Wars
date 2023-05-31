@@ -19,9 +19,9 @@ func initialize(container, spawn_position:Vector2, direction2:Vector2):
 func _physics_process(delta):
 	position += direction * VELOCITY * delta
 
-	var visible_rect:Rect2 = get_viewport().get_visible_rect()
-	if !visible_rect.has_point(global_position):
-		_remove()
+#	var visible_rect:Rect2 = get_viewport().get_visible_rect()
+#	if !visible_rect.has_point(global_position):
+#		_remove()
 
 # Si supero una cantidad de tiempo de vida
 func _on_lifetime_timer_timeout():

@@ -28,12 +28,13 @@ var time_wave
 #tiempo actual de oleada
 var time_current_wave = 0
 
+var wave_on = true
 
 func _ready():
 	SAVE.load_data()
 	randomize()
 	$HudDatos/ExpBar.hide()
-
+	GLOBALS.connect("enemy_die",self,"_on_enemy_dies")
 
 
 func new_game():
@@ -47,42 +48,48 @@ func new_game():
 
 # Timer que spawnea los enemigos en cada oleada
 func _on_EnemiesTimer_timeout():
-	if time_wave < 1:
-		$HudDatos/TimerText.hide()
-		$HudDatos/PlayWaveTimer.stop()
-		current_wave +=1
-		time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
-		deleteEnemies()
-		see_wave_text()
-		return
-	var enemy = enemy_scene.instance()
-	enemy.set_values(player)
-	enemies.append(enemy)
-	
-	var enemy_spawn_location = get_node("EnemiesPath/EnemiesPathLocation")
-	enemy_spawn_location.offset = randi()
-	enemy.position = enemy_spawn_location.position
-	add_child(enemy)
-	enemy_count+=1
-	time_current_wave+=1
-	time_wave -=1
-	$HudDatos/TimerText.text = "Next Wave in: " + str(time_wave)
-	
+	if wave_on :
+		if time_wave < 1:
+			$EnemiesTimer.stop()
+			$HudDatos/TimerText.hide()
+			$HudDatos/PlayWaveTimer.stop()
+			current_wave +=1
+			time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
+			$HudDatos/WaitEnemyDieTimer.start()
+			return
+		var enemy = enemy_scene.instance()
+		enemy.set_values(player)
+		enemies.append(enemy)
+		
+		var enemy_spawn_location = get_node("EnemiesPath/EnemiesPathLocation")
+		enemy_spawn_location.offset = randi()
+		enemy.position = enemy_spawn_location.position
+		add_child(enemy)
+		enemy_count+=1
+		time_current_wave+=1
+		time_wave -=1
+		$HudDatos/TimerText.text = "Next Wave in: " + str(time_wave)
+
 
 #Timer que ejecuta cada oleada
 func _on_PlayWaveTimer_timeout():
 	if player.health <= 1:
 		return
+	
 	$HudDatos/TimerText.show()
 	$HudDatos/TimerText.text = "Next Wave in: " + str(time_wave)
 	$EnemiesTimer.start()
 
 
+
+
 #Muestra el texto en pantalla previo a iniciar la oleada
-func see_wave_text():	
-	$HudDatos/NumberWaveTimer/NumberWave.show()
-	$HudDatos/NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
-	$HudDatos/NumberWaveTimer.start()
+func see_wave_text():
+	if enemy_count == 0:
+		$HudDatos/NumberWaveTimer/NumberWave.show()
+		$HudDatos/NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
+		$HudDatos/NumberWaveTimer.start()
+		$HudDatos/WaitEnemyDieTimer.stop()
 
 #Timer que disminuye el tiempo que muestra el texto previo a iniciar la oleada
 func _on_NumberWaveTimer_timeout():
@@ -103,3 +110,9 @@ func deleteEnemies():
 	enemies.clear()
 	$EnemiesTimer.stop()
 
+func _on_enemy_dies():
+	enemy_count -= 1
+
+
+func _on_WaitEnemyDieTimer_timeout():
+	see_wave_text()

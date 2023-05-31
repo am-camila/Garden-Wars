@@ -65,7 +65,7 @@ func fire_at_enemy():
 			else:
 				$Fire2Audio.play()
 			proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(enem.global_position))	
-
+			
 
 func _on_wave_end():
 	$Fire1Audio.stop()

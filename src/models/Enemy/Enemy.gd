@@ -6,7 +6,7 @@ var player
 var max_health
 
 
-export var speed = 3500
+export var speed = 4500
 export var health = 50
 export var damage = 25
 
