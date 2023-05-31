@@ -32,7 +32,7 @@ var time_current_wave = 0
 func _ready():
 	SAVE.load_data()
 	randomize()
-	$ExpBar.hide()
+	$HudDatos/ExpBar.hide()
 
 
 
@@ -48,8 +48,8 @@ func new_game():
 # Timer que spawnea los enemigos en cada oleada
 func _on_EnemiesTimer_timeout():
 	if time_wave < 1:
-		$TimerText.hide()
-		$PlayWaveTimer.stop()
+		$HudDatos/TimerText.hide()
+		$HudDatos/PlayWaveTimer.stop()
 		current_wave +=1
 		time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
 		deleteEnemies()
@@ -66,33 +66,33 @@ func _on_EnemiesTimer_timeout():
 	enemy_count+=1
 	time_current_wave+=1
 	time_wave -=1
-	$TimerText.text = "Next Wave in: " + str(time_wave)
+	$HudDatos/TimerText.text = "Next Wave in: " + str(time_wave)
 	
 
 #Timer que ejecuta cada oleada
 func _on_PlayWaveTimer_timeout():
 	if player.health <= 1:
 		return
-	$TimerText.show()
-	$TimerText.text = "Next Wave in: " + str(time_wave)
+	$HudDatos/TimerText.show()
+	$HudDatos/TimerText.text = "Next Wave in: " + str(time_wave)
 	$EnemiesTimer.start()
 
 
 #Muestra el texto en pantalla previo a iniciar la oleada
 func see_wave_text():	
-	$NumberWaveTimer/NumberWave.show()
-	$NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
-	$NumberWaveTimer.start()
+	$HudDatos/NumberWaveTimer/NumberWave.show()
+	$HudDatos/NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
+	$HudDatos/NumberWaveTimer.start()
 
 #Timer que disminuye el tiempo que muestra el texto previo a iniciar la oleada
 func _on_NumberWaveTimer_timeout():
 	if sleep_wave_timer <= 1:
-		$NumberWaveTimer.stop()
-		$NumberWaveTimer/NumberWave.hide()
-		$PlayWaveTimer.start()
+		$HudDatos/NumberWaveTimer.stop()
+		$HudDatos/NumberWaveTimer/NumberWave.hide()
+		$HudDatos/PlayWaveTimer.start()
 		sleep_wave_timer = sleep_global_time +1
 	sleep_wave_timer -= 1
-	$NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
+	$HudDatos/NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
 
 
 func deleteEnemies():
