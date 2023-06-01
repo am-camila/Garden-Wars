@@ -126,6 +126,7 @@ func _on_HitArea_body_entered(body):
 
 
 
+
 func check_health():
 	if max_health < 1:
 		GLOBALS.emit_signal("player_die")
@@ -154,3 +155,18 @@ func _special_fire():
 			proj_O.initialize(projectile_container, fire_position.global_position, glob.direction_to(fire_position.global_position+(Vector2(-10,0))))
 			$SpecialFire.play()
 	
+func _on_FireArea_body_exited(body):
+	fire_timer.stop()
+
+
+func increaseSpeed(duration, strength):
+	speed = speed * strength
+
+
+#func _on_powerup_collected():
+#	var powerUpClass = powerUpScene.powerUpClass
+#	if powerUpClass == typeof(SpeedPowerUp):
+#		increaseSpeed(5, 1.5)
+	#elif powerUpType == "immunity":
+	#    enableImmunity(7)  # Enable immunity for 7 seconds
+   
