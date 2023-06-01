@@ -3,6 +3,7 @@ extends Node
 export var enemy_scene: PackedScene
 onready var player = $Player
 
+var music_on = false
 
 #lista que contiene a todos los enemigos generados
 var enemies = []
@@ -35,6 +36,7 @@ func _ready():
 	randomize()
 	$HudDatos/ExpBar.hide()
 	GLOBALS.connect("enemy_die",self,"_on_enemy_dies")
+	GLOBALS.connect("player_die",self,"_on_player_dies")
 
 
 func new_game():
@@ -73,6 +75,9 @@ func _on_EnemiesTimer_timeout():
 
 #Timer que ejecuta cada oleada
 func _on_PlayWaveTimer_timeout():
+	if !music_on:
+		music_on = !music_on
+		$SpringMusicTheme.play()
 	if player.health <= 1:
 		return
 	
@@ -116,3 +121,7 @@ func _on_enemy_dies():
 
 func _on_WaitEnemyDieTimer_timeout():
 	see_wave_text()
+
+func _on_player_dies():
+	$SpringMusicTheme.stop()
+	Input.action_press("ui_cancel")

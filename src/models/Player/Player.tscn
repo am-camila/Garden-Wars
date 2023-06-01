@@ -15,7 +15,7 @@ extents = Vector2( 34, 34 )
 radius = 230.176
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 34, 34.5 )
+extents = Vector2( 37, 36.5 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 490, 513 )

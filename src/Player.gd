@@ -90,11 +90,6 @@ func _process(delta):
 		if max_health == 25:
 			$CancelSpecialFire.play()
 		
-#	if player_position.length() > 0:
-#		player_position = player_position.normalized() * speed 
-			
-#	position += player_position * delta
-	
 	check_health()
 	
 
@@ -128,13 +123,14 @@ func _on_HitArea_body_entered(body):
 			$LifePoints.show()
 			can_take_damage = false
 			$LifeTimer.start()
-			
-				#get_tree().paused = true
+
 
 
 func check_health():
 	if max_health < 1:
-				print("mori")
+		GLOBALS.emit_signal("player_die")
+		return
+		
 
 func _on_LifeTimer_timeout():
 	can_take_damage = true

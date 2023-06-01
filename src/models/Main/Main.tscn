@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://models/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://models/Enemy/Enemy.tscn" type="PackedScene" id=2]
@@ -8,10 +8,11 @@
 [ext_resource path="res://models/ExpBar/ExpBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://models/Hud/PauseMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://models/Wall/wall.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/songs/Peaceful_music_theme.ogg" type="AudioStream" id=9]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -39.2034, -61.2263, 0, 0, 0, 0, 1582.41, -55.7342, 0, 0, 0, 0, 1580.89, 1920.62, 0, 0, 0, 0, -36.4259, 1921.83, 0, 0, 0, 0, -39.2034, -55.7342 )
+"points": PoolVector2Array( 0, 0, 0, 0, 878.035, -38.8325, 0, 0, 0, 0, 879.315, 1941.73, 0, 0, 0, 0, -36.0027, 1936.76, 0, 0, 0, 0, -39.2034, -61.2263, 0, 0, 0, 0, 878.675, -58.7378, 0, 0, 0, 0, 878.035, -38.8325 )
 }
 
 [sub_resource type="DynamicFont" id=2]
@@ -30,13 +31,13 @@ enemy_scene = ExtResource( 2 )
 position = Vector2( 894, 927 )
 
 [node name="EnemiesPath" type="Path2D" parent="."]
-position = Vector2( 281.663, 516.607 )
-scale = Vector2( 0.756654, 0.401905 )
+position = Vector2( 153.71, 108.476 )
+scale = Vector2( 1.8802, 0.840755 )
 curve = SubResource( 1 )
 
 [node name="EnemiesPathLocation" type="PathFollow2D" parent="EnemiesPath"]
-position = Vector2( -39.2034, -61.2263 )
-rotation = 0.00338644
+position = Vector2( 878.035, -38.8325 )
+rotation = 1.57015
 
 [node name="EnemiesTimer" type="Timer" parent="."]
 
@@ -92,6 +93,10 @@ scale = Vector2( 1, 2.83 )
 position = Vector2( 1848, 42 )
 rotation = 0.0
 scale = Vector2( 1, 2.83 )
+
+[node name="SpringMusicTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+bus = "Music"
 
 [connection signal="timeout" from="EnemiesTimer" to="." method="_on_EnemiesTimer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
