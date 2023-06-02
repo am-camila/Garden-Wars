@@ -2,9 +2,9 @@ extends Node2D
 
 class_name Player
 
-export var speed = 500
+export var normal_speed = 500
+export var normal_damage = 25
 export var health = 100
-export var damage = 25
 
 
 # Variables atributos del player
@@ -14,7 +14,8 @@ var can_take_damage = true
 
 onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
-
+onready var powerUp_timer = $PowerUpTimer
+onready var shieldArea: Area2D = $ShieldArea
 
 export (PackedScene) var projectile_scene
 
@@ -24,7 +25,9 @@ var enemies = []
 var target:KinematicBody2D
 var projectile:Sprite
 var projectile_container
-
+var powerUp_active = false
+var speed
+var damage
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,6 +39,9 @@ func _ready():
 	$LifePoints.max_value = health
 	$LifePoints.hide()
 	$LifePoints.value = max_health
+	speed = normal_speed
+	damage = normal_damage
+	shieldArea.monitoring = true
 
 
 func initialize(container, projectile_container):
@@ -151,11 +157,21 @@ func _on_FireArea_body_exited(body):
 func increaseSpeed(duration, strength):
 	speed = speed * strength
 
+func increaseDamage(duration, strength):
+	damage = damage * strength
+	
+func activate_shield(duration):
+	shieldArea.monitoring = false
 
-#func _on_powerup_collected():
-#	var powerUpClass = powerUpScene.powerUpClass
-#	if powerUpClass == typeof(SpeedPowerUp):
-#		increaseSpeed(5, 1.5)
-	#elif powerUpType == "immunity":
-	#    enableImmunity(7)  # Enable immunity for 7 seconds
-   
+
+func _on_PowerUpTimer_timeout():
+	powerUp_active = false
+	restore_normal_attributes()
+
+func restore_normal_attributes():
+	speed = normal_speed
+	damage = normal_damage
+	shieldArea.monitoring = true
+
+	print("restoring attributes to velocity:"+ str(speed) + "damage:" + str(damage) + str("- deactivated area"))
+
