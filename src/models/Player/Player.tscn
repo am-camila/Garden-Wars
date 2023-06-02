@@ -8,20 +8,14 @@
 [ext_resource path="res://assets/songs/Special_Fire.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/songs/Cancel_special_fire.wav" type="AudioStream" id=7]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 34, 34 )
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 230.176
-
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 37, 36.5 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 230.176
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 49.0918
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 34, 34 )
 
 [node name="Player" type="KinematicBody2D"]
 light_mask = 513
@@ -85,7 +79,6 @@ limit_bottom = 1800
 [node name="FirePosition" type="Position2D" parent="."]
 position = Vector2( 0, -1 )
 
-[connection signal="body_entered" from="FireArea" to="." method="_on_FireArea_body_entered"]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
 

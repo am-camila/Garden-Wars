@@ -8,8 +8,8 @@
 extents = Vector2( 19, 39 )
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 24.0
-height = 54.0
+radius = 22.0
+height = 62.0
 
 [node name="Enemy" type="KinematicBody2D"]
 scale = Vector2( 1, 0.5 )
@@ -19,8 +19,8 @@ script = ExtResource( 2 )
 powerUpScene = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 6.875, 15 )
-scale = Vector2( 1.03788, 1.07692 )
+position = Vector2( 6, 18 )
+scale = Vector2( 0.7, 1 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

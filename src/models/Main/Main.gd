@@ -65,7 +65,7 @@ func _on_EnemiesTimer_timeout():
 		
 		var enemy_spawn_location = get_node("EnemiesPath/EnemiesPathLocation")
 		enemy_spawn_location.offset = randi()
-		enemy.position = enemy_spawn_location.position
+		enemy.position = enemy_spawn_location.get_global_transform().origin
 		add_child(enemy)
 		enemy_count+=1
 		time_current_wave+=1

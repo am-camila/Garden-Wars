@@ -46,5 +46,6 @@ func _on_Area2D_body_entered(body):
 			var powerUp = powerUpScene.instance()
 			powerUp.position = position
 			get_parent().add_child(powerUp)
+			GLOBALS.emit_signal("spawn_powerup")
 			queue_free()
 
