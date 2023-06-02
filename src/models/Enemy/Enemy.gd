@@ -11,7 +11,8 @@ export var damage = 25
 export var powerupChance: float
 export (PackedScene) var speed_power_up
 export (PackedScene) var hit_power_up
-onready var powerUps: Array  = [speed_power_up,hit_power_up]
+export (PackedScene) var shield_power_up
+onready var powerUps: Array  = [speed_power_up,hit_power_up,shield_power_up]
 
 
 func _ready():
@@ -42,10 +43,10 @@ func _on_Area2D_body_entered(body):
 		GLOBALS.emit_signal("hit")
 		if max_health < 1:
 			GLOBALS.emit_signal("enemy_die")
-			if randf()*100 <= powerupChance:
-				var powerUp = random_powerUp()
-				powerUp.position = position
-				get_parent().add_child(powerUp)
+			#if randf()*100 <= powerupChance:
+			var powerUp = random_powerUp()
+			powerUp.position = position
+			get_parent().add_child(powerUp)
 			queue_free()
 
 
@@ -53,4 +54,4 @@ func random_powerUp():
 	if powerUps.size() > 0:
 		var index = randi() % powerUps.size()
 		var rand_powerUp = powerUps[index].instance()
-		return rand_powerUp
+		return shield_power_up.instance()

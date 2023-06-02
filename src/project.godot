@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://Projectile.gd"
 }, {
 "base": "PowerUp",
+"class": "ShieldPowerUp",
+"language": "GDScript",
+"path": "res://models/PowerUps/ShieldPowerUp.gd"
+}, {
+"base": "PowerUp",
 "class": "SpeedPowerUp",
 "language": "GDScript",
 "path": "res://models/PowerUps/SpeedPowerUp.gd"
@@ -45,6 +50,7 @@ _global_script_class_icons={
 "Player": "",
 "PowerUp": "",
 "Projectile": "",
+"ShieldPowerUp": "",
 "SpeedPowerUp": ""
 }
 

@@ -15,6 +15,7 @@ var can_take_damage = true
 onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
 onready var powerUp_timer = $PowerUpTimer
+onready var shieldArea: Area2D = $ShieldArea
 
 export (PackedScene) var projectile_scene
 
@@ -40,6 +41,8 @@ func _ready():
 	$LifePoints.value = max_health
 	speed = normal_speed
 	damage = normal_damage
+	shieldArea.monitoring = true
+
 
 func initialize(container, projectile_container):
 	self.projectile_container = projectile_container
@@ -157,8 +160,9 @@ func increaseSpeed(duration, strength):
 func increaseDamage(duration, strength):
 	damage = damage * strength
 	
-func activate_shield():
-	pass
+func activate_shield(duration):
+	shieldArea.monitoring = false
+
 
 func _on_PowerUpTimer_timeout():
 	powerUp_active = false
@@ -167,5 +171,7 @@ func _on_PowerUpTimer_timeout():
 func restore_normal_attributes():
 	speed = normal_speed
 	damage = normal_damage
-	print("restoring attributes to velocity:"+ str(speed) + "damage:" + str(damage))
+	shieldArea.monitoring = true
+
+	print("restoring attributes to velocity:"+ str(speed) + "damage:" + str(damage) + str("- deactivated area"))
 

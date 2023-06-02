@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://PowerUp.gd" type="Script" id=1]
 [ext_resource path="res://models/PowerUps/HitDamagePowerUp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://models/PowerUps/SpeedPowerUp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://models/PowerUps/ShieldPowerUp.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -13,6 +14,8 @@ script = ExtResource( 1 )
 [node name="SpeedPowerUp" parent="." instance=ExtResource( 3 )]
 
 [node name="HitDamagePowerUp" parent="." instance=ExtResource( 2 )]
+
+[node name="ShieldPowerU1p" parent="." instance=ExtResource( 2 )]
 
 [node name="Node2D" type="Area2D" parent="."]
 collision_layer = 8
@@ -25,6 +28,8 @@ shape = SubResource( 1 )
 wait_time = 8.0
 one_shot = true
 autostart = true
+
+[node name="ShieldPowerUp" parent="." instance=ExtResource( 4 )]
 
 [connection signal="body_entered" from="Node2D" to="." method="_on_Node2D_body_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
