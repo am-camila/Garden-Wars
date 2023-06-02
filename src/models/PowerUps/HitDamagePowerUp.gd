@@ -6,10 +6,12 @@ func _ready():
 	pass 
 	
 func applyPowerUp(player, duration, strength):
-	queue_free()
-	player.powerUp_timer.wait_time = duration
-	player.powerUp_timer.start()
-	player.powerUp_active = true
+	if player.powerUp_active:
+			player.restore_normal_attributes()
+			queue_free()
+			player.powerUp_timer.wait_time = duration
+			player.powerUp_timer.start()
+			player.powerUp_active = true
 
 	if (player.powerUp_active):
 		player.restore_normal_attributes()

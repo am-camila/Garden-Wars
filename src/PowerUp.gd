@@ -7,11 +7,13 @@ export var strength: float = 1.30
 
 onready var timer = $SpawnTimer
 
+
 func _ready():
 	pass 
 
 func applyPowerUp(player:Player, duration:float, strength:float):
 	queue_free()
+	$PickUp.play()
 	player.powerUp_timer.wait_time = duration
 	player.powerUp_timer.start()
 	player.powerUp_active = true

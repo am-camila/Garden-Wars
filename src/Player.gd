@@ -6,6 +6,7 @@ export var normal_speed = 500
 export var normal_damage = 25
 export var health = 100
 
+
 var velocity : Vector2
 var direction : Vector2
 
@@ -13,7 +14,6 @@ var direction : Vector2
 # Variables atributos del player
 var max_health
 var can_take_damage = true
-
 
 onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
@@ -167,6 +167,7 @@ func _on_FireArea_body_exited(body):
 
 func increaseSpeed(duration, strength):
 	speed = speed * strength
+	print("VELOCIDAD: "+ str(speed))
 
 func increaseDamage(duration, strength):
 	damage = damage * strength
@@ -186,3 +187,8 @@ func restore_normal_attributes():
 
 	print("restoring attributes to velocity:"+ str(speed) + "damage:" + str(damage) + str("- deactivated area"))
 
+func increaseHealth(strength):
+	print(health)
+	if max_health < health:
+		max_health += strength
+		$LifePoints.value = max_health

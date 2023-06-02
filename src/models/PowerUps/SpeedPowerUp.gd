@@ -3,13 +3,15 @@ extends PowerUp
 class_name SpeedPowerUp
 
 func _ready():
-	strength = 2 
+	strength = 1.6
 
 func applyPowerUp(player, duration, strength):
-	queue_free()
-	player.powerUp_timer.wait_time = duration
-	player.powerUp_timer.start()
-	player.powerUp_active = true
+	if player.powerUp_active:
+		player.restore_normal_attributes()
+		queue_free()
+		player.powerUp_timer.wait_time = duration
+		player.powerUp_timer.start()
+		player.powerUp_active = true
 
 	print("applying powerUp: Speed for "+str(duration) +"and with strength "+ str(strength))
 	player.increaseSpeed(duration, strength)
