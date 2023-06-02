@@ -101,4 +101,3 @@ func deleteEnemies():
 			enemy.queue_free()
 	enemies.clear()
 	$EnemiesTimer.stop()
-

@@ -12,6 +12,9 @@ func _ready():
 
 func applyPowerUp(player:Player, duration:float, strength:float):
 	queue_free()
+	player.powerUp_timer.wait_time = duration
+	player.powerUp_timer.start()
+	player.powerUp_active = true
 
 func _on_Node2D_body_entered(body):
 	print("choque con un nodo: "+str(body))
@@ -22,5 +25,3 @@ func _on_Node2D_body_entered(body):
 #Si el player no toma el powerup dentro de un determinado tiempo, se destruye.
 func _on_SpawnTimer_timeout():
 	queue_free()
-
-
