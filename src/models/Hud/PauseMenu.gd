@@ -8,7 +8,7 @@ func _ready():
 	pass
 
 
-func _input(event):
+func _unhandled_input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
 		$Settings.initialize_data()
 		visible = not visible
@@ -25,5 +25,5 @@ func _on_SettingsButton_pressed():
 
 
 func _on_MainMenuButton_pressed():
-	print("Ir a main menu")
-	#get_tree().change_scene("res://models/Main/Main.tscn")
+	get_tree().paused = false
+	get_tree().change_scene("res://models/Main/Main.tscn")

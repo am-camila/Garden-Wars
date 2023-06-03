@@ -93,6 +93,7 @@ func _process(delta):
 			max_health -= 25
 			$LifePoints.value = max_health
 			$LifePoints.show()
+			return
 		if max_health == 25:
 			$CancelSpecialFire.play()
 		
