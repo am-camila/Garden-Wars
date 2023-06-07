@@ -60,12 +60,14 @@ func _on_EnemiesTimer_timeout():
 			$HudDatos/WaitEnemyDieTimer.start()
 			return
 		var enemy = enemy_scene.instance()
-		enemy.set_values(player)
+		
 		enemies.append(enemy)
 		
 		var enemy_spawn_location = get_node("EnemiesPath/EnemiesPathLocation")
 		enemy_spawn_location.offset = randi()
-		enemy.position = enemy_spawn_location.get_global_transform().origin
+		var new_location = enemy_spawn_location.get_global_transform().origin
+		enemy.position = new_location
+		enemy.set_values(player,new_location)
 		add_child(enemy)
 		enemy_count+=1
 		time_current_wave+=1

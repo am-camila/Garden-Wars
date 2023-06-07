@@ -5,6 +5,12 @@ class_name Enemy
 var player
 var max_health
 
+#Variables de colision
+var hayColision = false
+var areasDentro = 0
+var parientes = []
+var spawn_point :Vector2
+var collition_count = 0
 
 export var speed = 200
 export var health = 50
@@ -23,18 +29,26 @@ func _ready():
 	$LifeBar.hide()
 	$LifeBar.value = max_health
 
-func set_values(player):
+func set_values(player, spawn):
 	self.player = player
+	spawn_point = spawn
 
 func _process(delta):
 	if player == null:
 		return
 		
-	var direction = (player.position - position).normalized()
-	var movement = direction * speed
-	#if speed < 3000:
-	#	speed += delta * speed
-	move_and_slide(movement)
+	if !hayColision:
+		var direction = (player.position - position).normalized()
+		var movement = direction * speed
+		move_and_slide(movement)
+	elif hayColision:
+		collition_count += 1
+		if collition_count >= 10: #&& areasDentro <= 2:
+			hayColision = false
+			collition_count = 0
+		var direction_spawn = (spawn_point - position).normalized()
+		var movement_spawn = direction_spawn * speed
+		move_and_slide(movement_spawn)
 
 
 func _on_Area2D_body_entered(body):
@@ -58,3 +72,15 @@ func random_powerUp():
 		var index = randi() % powerUps.size()
 		var rand_powerUp = powerUps[index].instance()
 		return rand_powerUp
+
+
+
+func _on_CollisionParents_area_entered(area):
+	areasDentro += 1
+	hayColision = true
+
+
+func _on_CollisionParents_area_exited(area):
+	areasDentro -= 1
+	if areasDentro == 0:
+		hayColision = false
