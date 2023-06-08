@@ -18,7 +18,7 @@ export var time_per_wave = 10
 var sleep_global_time = 5
 
 #segundos de espera entre oleada
-var sleep_wave_timer = 1
+var sleep_wave_timer = 5
 
 #oleada actual
 var current_wave = 1
