@@ -93,6 +93,7 @@ func _on_PlayWaveTimer_timeout():
 #Muestra el texto en pantalla previo a iniciar la oleada
 func see_wave_text():
 	if enemy_count == 0:
+		player.enemies = []
 		$HudDatos/NumberWaveTimer/NumberWave.show()
 		$HudDatos/NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
 		$HudDatos/NumberWaveTimer.start()

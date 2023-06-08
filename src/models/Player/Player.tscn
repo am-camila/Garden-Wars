@@ -107,5 +107,6 @@ __meta__ = {
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_HitArea_body_entered"]
 [connection signal="body_entered" from="FireArea" to="." method="_on_FireArea_body_entered"]
+[connection signal="body_exited" from="FireArea" to="." method="_on_FireArea_body_exited"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
 [connection signal="timeout" from="PowerUpTimer" to="." method="_on_PowerUpTimer_timeout"]

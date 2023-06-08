@@ -25,7 +25,9 @@ export (PackedScene) var projectile_scene
 
 # Variables para enemigos y disparar
 var enemies = []
+var enemies_count = 0
 var target:KinematicBody2D
+var near :float = 1000.0
 var projectile:Sprite
 var projectile_container
 var powerUp_active = false
@@ -49,38 +51,6 @@ func _ready():
 	shieldArea.monitoring = true
 
 
-func initialize(container, projectile_container):
-	self.projectile_container = projectile_container
-
-
-func fire_at_enemy():
-	if enemies.size() == 0:
-		fire_timer.stop()
-	if enemies.size() > 0:
-		var enem = enemies.front()
-		if !is_instance_valid(enem):
-			if enemies.size() > 0:
-				enemies.remove(0)
-				if enemies.size() > 0:
-					enem = enemies.front()
-		else:
-			var proj_instance = projectile_scene.instance()
-			var num_rand = randi() % 2
-			if num_rand:
-				$Fire1Audio.play()
-			else:
-				$Fire2Audio.play()
-			proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(enem.global_position))	
-			
-
-func _on_wave_end():
-	$Fire1Audio.stop()
-	$Fire2Audio.stop()
-
-func _on_hit_enemy():
-	$Fire1Audio.stop()
-	$Fire2Audio.stop()
-
 func _process(delta):
 	velocity.x = direction.x * speed
 	velocity.y = direction.y * speed
@@ -98,10 +68,62 @@ func _process(delta):
 			$CancelSpecialFire.play()
 		
 	check_health()
-	
 
 
-func _input(event):
+func initialize(container, projectile_container):
+	self.projectile_container = projectile_container
+
+
+func fire_at_enemy():
+#	if enemies.size() == 0:
+#		fire_timer.stop()
+#	if enemies.size() > 0:
+#		var enem = enemies.front()
+#		if !is_instance_valid(enem):
+#			if enemies.size() > 0:
+#				enemies.remove(0)
+#				if enemies.size() > 0:
+#					enem = enemies.front()
+#		else:
+#			var proj_instance = projectile_scene.instance()
+#			var num_rand = randi() % 2
+#			if num_rand:
+#				$Fire1Audio.play()
+#			else:
+#				$Fire2Audio.play()
+#			proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(enem.global_position))	
+		
+	if enemies_count == 0:
+		fire_timer.stop()
+	if enemies.size() > 0:
+		near = 1000.0
+		for elem in enemies:
+			if is_instance_valid(elem):
+				var enemy_distance = position.distance_to(elem.position)
+				if enemy_distance < near:
+					near = enemy_distance
+					target = elem
+	if is_instance_valid(target):
+		var proj_instance = projectile_scene.instance()
+		var num_rand = randi() % 2
+		if num_rand:
+			$Fire1Audio.play()
+		else:
+			$Fire2Audio.play()
+		proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(target.global_position))	
+
+
+func _on_wave_end():
+	$Fire1Audio.stop()
+	$Fire2Audio.stop()
+
+func _on_hit_enemy():
+	$Fire1Audio.stop()
+	$Fire2Audio.stop()
+
+
+
+func _unhandled_input(event):
 	direction = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		direction.x = 1
@@ -117,10 +139,14 @@ func _input(event):
 
 func _on_FireArea_body_entered(body):
 	if body is Enemy:
+		enemies_count += 1
 		enemies.append(body)
 		fire_timer.start()
 
-
+func _on_FireArea_body_exited(body):
+	var index = enemies.find(body)
+	enemies.remove(index)
+	enemies_count -= 1
 
 func _on_HitArea_body_entered(body):
 	if body is Enemy:
@@ -132,13 +158,11 @@ func _on_HitArea_body_entered(body):
 			$LifeTimer.start()
 
 
-
-
 func check_health():
 	if max_health < 1:
 		GLOBALS.emit_signal("player_die")
 		return
-		
+
 
 func _on_LifeTimer_timeout():
 	can_take_damage = true
@@ -162,8 +186,7 @@ func _special_fire():
 			proj_O.initialize(projectile_container, fire_position.global_position, glob.direction_to(fire_position.global_position+(Vector2(-10,0))))
 			$SpecialFire.play()
 	
-func _on_FireArea_body_exited(body):
-	fire_timer.stop()
+
 
 
 func increaseSpeed(duration, strength):
