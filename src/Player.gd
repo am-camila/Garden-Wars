@@ -193,3 +193,11 @@ func increaseHealth(strength):
 	if max_health < health:
 		max_health += strength
 		$LifePoints.value = max_health
+
+
+func _on_ShieldArea_body_entered(body):
+	print("SHIELD DETECTED BODY: "+ str(body))
+
+
+func _on_ShieldArea_area_entered(area):
+	print("SHIELD DETECTED AREA: "+ str(area))
