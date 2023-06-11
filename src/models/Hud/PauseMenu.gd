@@ -10,6 +10,7 @@ func _ready():
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
+		GLOBALS.emit_signal("wave_text")
 		$Settings.initialize_data()
 		visible = not visible
 		get_tree().paused = not get_tree().paused

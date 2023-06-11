@@ -34,7 +34,6 @@ var powerUp_active = false
 var speed
 var damage
 
-# Variables para el limite del mapa
 
 
 # Called when the node enters the scene tree for the first time.
@@ -75,24 +74,6 @@ func initialize(container, projectile_container):
 
 
 func fire_at_enemy():
-#	if enemies.size() == 0:
-#		fire_timer.stop()
-#	if enemies.size() > 0:
-#		var enem = enemies.front()
-#		if !is_instance_valid(enem):
-#			if enemies.size() > 0:
-#				enemies.remove(0)
-#				if enemies.size() > 0:
-#					enem = enemies.front()
-#		else:
-#			var proj_instance = projectile_scene.instance()
-#			var num_rand = randi() % 2
-#			if num_rand:
-#				$Fire1Audio.play()
-#			else:
-#				$Fire2Audio.play()
-#			proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(enem.global_position))	
-		
 	if enemies_count == 0:
 		fire_timer.stop()
 	if enemies.size() > 0:
@@ -145,7 +126,8 @@ func _on_FireArea_body_entered(body):
 
 func _on_FireArea_body_exited(body):
 	var index = enemies.find(body)
-	enemies.remove(index)
+	if index >= enemies.size():
+		enemies.remove(index)
 	enemies_count -= 1
 
 func _on_HitArea_body_entered(body):
