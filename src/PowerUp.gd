@@ -19,7 +19,6 @@ func applyPowerUp(player:Player, duration:float, strength:float):
 	player.powerUp_active = true
 
 func _on_Node2D_body_entered(body):
-	print("choque con un nodo: "+str(body))
 	if body is Player:
 		applyPowerUp(body,duration,strength)
 		queue_free()

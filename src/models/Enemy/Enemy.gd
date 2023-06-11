@@ -45,6 +45,10 @@ func _process(delta):
 func _on_Area2D_body_entered(body):
 	if body is Projectile:
 		max_health -= player.damage
+		var direction = (position - body.spawn ).normalized()
+		var movement = direction * (body.VELOCITY * 0.05) 
+		position += movement
+		body.queue_free()
 		$LifeBar.value = max_health
 		$LifeBar.show()
 		GLOBALS.emit_signal("hit")
@@ -70,14 +74,10 @@ func _on_CollisionParents_area_entered(area):
 	parientes.append(area)
 	areasDentro += 1
 	if areasDentro > 0:
-		var breth_dist_sqr:float = Vector2(48.0, 0.0).length_squared()
 		for elem in parientes:
 			var direction:Vector2 = global_position - elem.global_position
-			var distance:float = direction.length_squared()
-			var magnitude:float = abs(distance - breth_dist_sqr) / breth_dist_sqr
 			position += direction.normalized() * 3
-#	var direction:Vector2 = global_position - area.global_position
-#	position += direction.normalized() 
+
 
 
 func _on_CollisionParents_area_exited(area):

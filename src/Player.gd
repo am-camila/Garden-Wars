@@ -161,11 +161,10 @@ func _special_fire():
 
 func increaseSpeed(duration, strength):
 	speed = speed * strength
-	print("VELOCIDAD: "+ str(speed))
 
 func increaseDamage(duration, strength):
 	damage = damage * strength
-	
+
 func activate_shield(duration):
 	shieldArea.monitoring = false
 
@@ -179,7 +178,6 @@ func restore_normal_attributes():
 	damage = normal_damage
 	shieldArea.monitoring = true
 
-	print("restoring attributes to velocity:"+ str(speed) + "damage:" + str(damage) + str("- deactivated area"))
 
 func increaseHealth(strength):
 	print(health)

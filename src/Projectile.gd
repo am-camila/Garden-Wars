@@ -7,10 +7,12 @@ onready var lifetime_timer = $LifetimeTimer
 export (float) var VELOCITY:float = 400.0
 
 var direction:Vector2
+var spawn:Vector2
 
 func initialize(container, spawn_position:Vector2, direction2:Vector2):
 	container.add_child(self)
 	self.direction = direction2
+	spawn = spawn_position
 	global_position = spawn_position
 	lifetime_timer.connect("timeout", self, "_on_lifetime_timer_timeout")
 	lifetime_timer.start()
