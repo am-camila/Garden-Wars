@@ -79,7 +79,7 @@ stream = ExtResource( 7 )
 [node name="SpecialFire" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 current = true
 limit_left = 0
 limit_top = -17
@@ -105,8 +105,9 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[connection signal="area_entered" from="HitArea" to="." method="_on_HitArea_area_entered"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_HitArea_body_entered"]
-[connection signal="body_entered" from="FireArea" to="." method="_on_FireArea_body_entered"]
-[connection signal="body_exited" from="FireArea" to="." method="_on_FireArea_body_exited"]
+[connection signal="area_entered" from="FireArea" to="." method="_on_FireArea_area_entered"]
+[connection signal="area_exited" from="FireArea" to="." method="_on_FireArea_area_exited"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
 [connection signal="timeout" from="PowerUpTimer" to="." method="_on_PowerUpTimer_timeout"]

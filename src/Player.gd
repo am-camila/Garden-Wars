@@ -26,7 +26,7 @@ export (PackedScene) var projectile_scene
 # Variables para enemigos y disparar
 var enemies = []
 var enemies_count = 0
-var target:KinematicBody2D
+var target:Area2D
 var near :float = 1000.0
 var projectile:Sprite
 var projectile_container
@@ -118,18 +118,6 @@ func _unhandled_input(event):
 	direction = direction.normalized()
 
 
-func _on_FireArea_body_entered(body):
-	if body is Enemy:
-		enemies_count += 1
-		enemies.append(body)
-		fire_timer.start()
-
-func _on_FireArea_body_exited(body):
-	var index = enemies.find(body)
-	if index >= enemies.size():
-		enemies.remove(index)
-	enemies_count -= 1
-
 func _on_HitArea_body_entered(body):
 	if body is Enemy:
 		if can_take_damage:
@@ -198,3 +186,27 @@ func increaseHealth(strength):
 	if max_health < health:
 		max_health += strength
 		$LifePoints.value = max_health
+
+
+func _on_HitArea_area_entered(area):
+	if area is Enemy:
+		if can_take_damage:
+			max_health -= area.damage
+			$LifePoints.value = max_health
+			$LifePoints.show()
+			can_take_damage = false
+			$LifeTimer.start()
+
+
+func _on_FireArea_area_entered(area):
+	if area is Enemy:
+		enemies_count += 1
+		enemies.append(area)
+		fire_timer.start()
+
+
+func _on_FireArea_area_exited(area):
+	var index = enemies.find(area)
+	if index >= enemies.size():
+		enemies.remove(index)
+	enemies_count -= 1

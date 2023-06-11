@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Node2D
 
 class_name Enemy
 
@@ -37,18 +37,9 @@ func _process(delta):
 	if player == null:
 		return
 		
-	if !hayColision:
-		var direction = (player.position - position).normalized()
-		var movement = direction * speed
-		move_and_slide(movement)
-	elif hayColision:
-		collition_count += 1
-		if collition_count >= 10: #&& areasDentro <= 2:
-			hayColision = false
-			collition_count = 0
-		var direction_spawn = (spawn_point - position).normalized()
-		var movement_spawn = direction_spawn * speed
-		move_and_slide(movement_spawn)
+	var direction_to_target = (player.position - position).normalized()
+	var movement_to_target = direction_to_target * speed * delta
+	position += movement_to_target
 
 
 func _on_Area2D_body_entered(body):
@@ -76,11 +67,21 @@ func random_powerUp():
 
 
 func _on_CollisionParents_area_entered(area):
+	parientes.append(area)
 	areasDentro += 1
-	hayColision = true
+	if areasDentro > 0:
+		var breth_dist_sqr:float = Vector2(48.0, 0.0).length_squared()
+		for elem in parientes:
+			var direction:Vector2 = global_position - elem.global_position
+			var distance:float = direction.length_squared()
+			var magnitude:float = abs(distance - breth_dist_sqr) / breth_dist_sqr
+			position += direction.normalized() * 3
+#	var direction:Vector2 = global_position - area.global_position
+#	position += direction.normalized() 
 
 
 func _on_CollisionParents_area_exited(area):
 	areasDentro -= 1
-	if areasDentro == 0:
-		hayColision = false
+	var find_p = parientes.find(area)
+	if find_p != -1:
+		parientes.remove(find_p)

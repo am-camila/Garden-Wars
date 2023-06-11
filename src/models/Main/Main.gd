@@ -40,6 +40,7 @@ func _ready():
 	GLOBALS.connect("wave_text",self,"_on_wave_text")
 
 
+
 func new_game():
 	#$ExpBar.show()
 	time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
