@@ -17,7 +17,9 @@ func load_data():
 			"full_screen_mode" : false,
 			"general_volumen" : -15,
 			"music_volumen" : -15,
-			"sfx_volumen" : -15
+			"sfx_volumen" : -15,
+			"blindness" : 0,
+			"blindness_intensity" : 1
 		}
 		save_data()
 	

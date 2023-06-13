@@ -39,6 +39,8 @@ func _ready():
 	GLOBALS.connect("player_die",self,"_on_player_dies")
 	GLOBALS.connect("wave_text",self,"_on_wave_text")
 	GLOBALS.connect("reset_game",self,"_on_reset_game")
+	SETTINGS.connect("change_blindness",self,"_on_change_blindness")
+	SETTINGS.connect("change_blindness_intensity",self,"_on_change_blindness_intensity")
 
 
 
@@ -148,3 +150,11 @@ func _on_reset_game():
 	current_wave = 1
 	time_wave
 	time_current_wave = 0
+
+
+func _on_change_blindness(value):
+	$BlindnessFilter.material.set_shader_param("mode",value)
+
+
+func _on_change_blindness_intensity(value):
+	$BlindnessFilter.material.set_shader_param("intensity",value)

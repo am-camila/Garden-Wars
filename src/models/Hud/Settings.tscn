@@ -251,41 +251,82 @@ margin_bottom = 293.0
 custom_fonts/font = SubResource( 1 )
 
 [node name="Blindness" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 336.0
+margin_top = 329.0
 margin_right = 224.0
-margin_bottom = 361.0
+margin_bottom = 354.0
 custom_fonts/font = SubResource( 2 )
 text = "Color Blindness Filter"
 
-[node name="BlindnessOption" type="CheckButton" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_left = 228.0
+[node name="BlindnessOption" type="OptionButton" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 379.0
 margin_top = 329.0
 margin_right = 454.0
-margin_bottom = 369.0
+margin_bottom = 354.0
+size_flags_horizontal = 10
+text = "Default"
+items = [ "Default", null, false, 0, null, "Protanopia", null, false, 1, null, "Deuteranopia", null, false, 2, null, "Tritanopia", null, false, 3, null ]
+selected = 0
+
+[node name="Blindness2" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_top = 358.0
+margin_right = 224.0
+margin_bottom = 383.0
+custom_fonts/font = SubResource( 2 )
+text = "iNTENSITY"
+
+[node name="Intensity" type="HBoxContainer" parent="TabsSettings/General/MarginContainer/VideoContainer"]
+margin_left = 228.0
+margin_top = 358.0
+margin_right = 454.0
+margin_bottom = 383.0
+
+[node name="Min" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/Intensity"]
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 19.0
+text = "min"
+
+[node name="IntensityBar" type="HSlider" parent="TabsSettings/General/MarginContainer/VideoContainer/Intensity"]
+margin_left = 29.0
+margin_right = 195.0
+margin_bottom = 25.0
+size_flags_horizontal = 11
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+
+[node name="Max" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer/Intensity"]
+margin_left = 199.0
+margin_top = 5.0
+margin_right = 226.0
+margin_bottom = 19.0
+text = "max"
+align = 2
+valign = 1
 
 [node name="Vacio3" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 373.0
+margin_top = 387.0
 margin_right = 224.0
-margin_bottom = 387.0
+margin_bottom = 401.0
 
 [node name="Vacio4" type="Label" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 373.0
+margin_top = 387.0
 margin_right = 454.0
-margin_bottom = 387.0
+margin_bottom = 401.0
 
 [node name="Save" type="Button" parent="TabsSettings/General/MarginContainer/VideoContainer"]
-margin_top = 391.0
+margin_top = 405.0
 margin_right = 224.0
-margin_bottom = 420.0
+margin_bottom = 434.0
 custom_fonts/font = SubResource( 4 )
 text = "SAVE"
 
 [node name="Close" type="Button" parent="TabsSettings/General/MarginContainer/VideoContainer"]
 margin_left = 228.0
-margin_top = 391.0
+margin_top = 405.0
 margin_right = 454.0
-margin_bottom = 420.0
+margin_bottom = 434.0
 custom_fonts/font = SubResource( 5 )
 text = "CANCEL"
 
@@ -293,6 +334,7 @@ text = "CANCEL"
 [connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/GeneralVolumen/GeneralBar" to="." method="_on_GeneralBar_value_changed"]
 [connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/MusicVolumen/MusicBar" to="." method="_on_MusicBar_value_changed"]
 [connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/SfxVolumen/SfxBar" to="." method="_on_SfxBar_value_changed"]
-[connection signal="pressed" from="TabsSettings/General/MarginContainer/VideoContainer/BlindnessOption" to="." method="_on_BlindnessOption_pressed"]
+[connection signal="item_selected" from="TabsSettings/General/MarginContainer/VideoContainer/BlindnessOption" to="." method="_on_BlindnessOption_item_selected"]
+[connection signal="value_changed" from="TabsSettings/General/MarginContainer/VideoContainer/Intensity/IntensityBar" to="." method="_on_IntensityBar_value_changed"]
 [connection signal="pressed" from="TabsSettings/General/MarginContainer/VideoContainer/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="TabsSettings/General/MarginContainer/VideoContainer/Close" to="." method="_on_Close_pressed"]
