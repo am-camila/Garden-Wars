@@ -11,6 +11,7 @@ var areasDentro = 0
 var parientes = []
 var spawn_point :Vector2
 var collition_count = 0
+var can_take_damage = true
 
 export var speed = 200
 export var health = 50
@@ -21,7 +22,7 @@ export (PackedScene) var hit_power_up
 export (PackedScene) var shield_power_up
 export (PackedScene) var life_power_up
 onready var powerUps: Array  = [speed_power_up,hit_power_up,life_power_up]
-
+onready var sprite = $Sprite
 
 func _ready():
 	$LifeBar.max_value = health
@@ -45,12 +46,9 @@ func _process(delta):
 func _on_Area2D_body_entered(body):
 	if body is Projectile:
 		max_health -= player.damage
-		var direction = (position - body.spawn ).normalized()
-		var movement = direction * (body.VELOCITY * 0.05) 
-		position += movement
-		body.queue_free()
+		hit_color()
+		speed = speed * 0.55
 		$LifeBar.value = max_health
-		$LifeBar.show()
 		GLOBALS.emit_signal("hit")
 		if max_health < 1:
 			GLOBALS.emit_signal("enemy_die")
@@ -61,6 +59,10 @@ func _on_Area2D_body_entered(body):
 				GLOBALS.emit_signal("spawn_powerup")
 			queue_free()
 
+
+func hit_color():
+	sprite.material.set_shader_param("flash_modifier",0.7)
+	$FlashTimer.start()
 
 func random_powerUp():
 	if powerUps.size() > 0:
@@ -85,3 +87,7 @@ func _on_CollisionParents_area_exited(area):
 	var find_p = parientes.find(area)
 	if find_p != -1:
 		parientes.remove(find_p)
+
+
+func _on_FlashTimer_timeout():
+	$Sprite.material.set_shader_param("flash_modifier",0)

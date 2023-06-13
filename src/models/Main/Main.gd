@@ -38,6 +38,7 @@ func _ready():
 	GLOBALS.connect("enemy_die",self,"_on_enemy_dies")
 	GLOBALS.connect("player_die",self,"_on_player_dies")
 	GLOBALS.connect("wave_text",self,"_on_wave_text")
+	GLOBALS.connect("reset_game",self,"_on_reset_game")
 
 
 
@@ -138,3 +139,12 @@ func _on_wave_text():
 	if !text_wave_on && enemy_count == 0:
 		$HudDatos/NumberWaveTimer/NumberWave.show()
 	text_wave_on = !text_wave_on
+
+func _on_reset_game():
+	max_enemies = 10
+	time_per_wave = 10
+	sleep_global_time = 5
+	sleep_wave_timer = 5
+	current_wave = 1
+	time_wave
+	time_current_wave = 0

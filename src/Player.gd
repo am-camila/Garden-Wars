@@ -19,6 +19,7 @@ onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
 onready var powerUp_timer = $PowerUpTimer
 onready var shieldArea: Area2D = $ShieldArea
+onready var sprite = $Sprite
 
 export (PackedScene) var projectile_scene
 
@@ -33,11 +34,12 @@ var projectile_container
 var powerUp_active = false
 var speed
 var damage
-
-
+var hit_timer
+var flash = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	reset_hit_count()
 	fire_timer.connect("timeout", self, "fire_at_enemy")
 	GLOBALS.connect("hit",self,"_on_hit_enemy")
 	GLOBALS.connect("wave_end",self,"_on_wave_end")
@@ -48,6 +50,7 @@ func _ready():
 	speed = normal_speed
 	damage = normal_damage
 	shieldArea.monitoring = true
+	sprite.material.set_shader_param("flash_modifier",0 )
 
 
 func _process(delta):
@@ -118,15 +121,6 @@ func _unhandled_input(event):
 	direction = direction.normalized()
 
 
-func _on_HitArea_body_entered(body):
-	if body is Enemy:
-		if can_take_damage:
-			max_health -= body.damage
-			$LifePoints.value = max_health
-			$LifePoints.show()
-			can_take_damage = false
-			$LifeTimer.start()
-
 
 func check_health():
 	if max_health < 1:
@@ -134,8 +128,9 @@ func check_health():
 		return
 
 
-func _on_LifeTimer_timeout():
-	can_take_damage = true
+#func _on_LifeTimer_timeout():
+#	can_take_damage = true
+#	$LifeTimer.stop()
 
 
 func _special_fire():
@@ -160,10 +155,14 @@ func _special_fire():
 
 
 func increaseSpeed(duration, strength):
-	speed = speed * strength
+	$PowerUpTimer.wait_time = duration
+	if speed == normal_speed:
+		speed = speed * strength
 
 func increaseDamage(duration, strength):
-	damage = damage * strength
+	$PowerUpTimer.wait_time = duration
+	if damage == normal_damage:
+		damage = damage * strength
 
 func activate_shield(duration):
 	shieldArea.monitoring = false
@@ -180,7 +179,6 @@ func restore_normal_attributes():
 
 
 func increaseHealth(strength):
-	print(health)
 	if max_health < health:
 		max_health += strength
 		$LifePoints.value = max_health
@@ -193,7 +191,8 @@ func _on_HitArea_area_entered(area):
 			$LifePoints.value = max_health
 			$LifePoints.show()
 			can_take_damage = false
-			$LifeTimer.start()
+#			$LifeTimer.start()
+			$Sprite/HitTimer.start()
 
 
 func _on_FireArea_area_entered(area):
@@ -208,3 +207,20 @@ func _on_FireArea_area_exited(area):
 	if index >= enemies.size():
 		enemies.remove(index)
 	enemies_count -= 1
+
+
+func _on_HitTimer_timeout():
+	if flash > 0:
+		flash = 0
+	else:
+		 flash = 0.7
+	sprite.material.set_shader_param("flash_modifier", flash)
+	hit_timer -= 1
+	if hit_timer == 0:
+		$Sprite/HitTimer.stop()
+		reset_hit_count()
+		can_take_damage = true
+
+
+func reset_hit_count():
+	hit_timer = 6

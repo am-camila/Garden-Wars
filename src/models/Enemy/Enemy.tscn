@@ -1,10 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://models/Scripts/Flash.gdshader" type="Shader" id=1]
 [ext_resource path="res://models/Enemy/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://models/PowerUps/HitDamagePowerUp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://models/PowerUps/SpeedPowerUp.tscn" type="PackedScene" id=4]
 [ext_resource path="res://models/PowerUps/ShieldPowerUp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://models/PowerUps/LifePowerUp.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/flash_color = Color( 0.776471, 0.764706, 0.764706, 1 )
+shader_param/flash_modifier = 0.231
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19, 39 )
@@ -28,6 +35,7 @@ shield_power_up = ExtResource( 5 )
 life_power_up = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 5 )
 position = Vector2( 6, 18 )
 scale = Vector2( 0.7, 1 )
 
@@ -59,6 +67,10 @@ position = Vector2( 7, 14 )
 scale = Vector2( 0.5, 1 )
 shape = SubResource( 3 )
 
+[node name="FlashTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered" flags=3]
 [connection signal="area_entered" from="CollisionParents" to="." method="_on_CollisionParents_area_entered"]
 [connection signal="area_exited" from="CollisionParents" to="." method="_on_CollisionParents_area_exited"]
+[connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]
