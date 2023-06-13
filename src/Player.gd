@@ -14,11 +14,17 @@ var direction : Vector2
 # Variables atributos del player
 var max_health
 var can_take_damage = true
+var one_petal: Texture
+var two_petals: Texture
+var three_petals: Texture
+var four_petals: Texture
+var five_petals: Texture
 
 onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
 onready var powerUp_timer = $PowerUpTimer
 onready var shieldArea: Area2D = $ShieldArea
+onready var flowerSprite = get_node("SpriteFlower")
 
 export (PackedScene) var projectile_scene
 
@@ -41,13 +47,16 @@ func _ready():
 	GLOBALS.connect("hit",self,"_on_hit_enemy")
 	GLOBALS.connect("wave_end",self,"_on_wave_end")
 	max_health = health
-	$LifePoints.max_value = health
-	$LifePoints.hide()
-	$LifePoints.value = max_health
 	speed = normal_speed
 	damage = normal_damage
 	shieldArea.monitoring = true
+	one_petal = load("res://assets/plant/flower/Sprite-flower-1petal.png")
+	two_petals = load("res://assets/plant/flower/Sprite-flower-2petals.png")
+	three_petals = load("res://assets/plant/flower/Sprite-flower-3petals.png")
+	four_petals = load("res://assets/plant/flower/Sprite-flower-4petals.png")
+	five_petals = load("res://assets/plant/flower/Sprite-flower-5petals.png")
 
+	changeFlowerSprite()
 
 func initialize(container, projectile_container):
 	self.projectile_container = projectile_container
@@ -91,8 +100,7 @@ func _process(delta):
 		if max_health > 25:
 			_special_fire()
 			max_health -= 25
-			$LifePoints.value = max_health
-			$LifePoints.show()
+			changeFlowerSprite()
 			return
 		if max_health == 25:
 			$CancelSpecialFire.play()
@@ -126,8 +134,7 @@ func _on_HitArea_body_entered(body):
 	if body is Enemy:
 		if can_take_damage:
 			max_health -= body.damage
-			$LifePoints.value = max_health
-			$LifePoints.show()
+			changeFlowerSprite()
 			can_take_damage = false
 			$LifeTimer.start()
 
@@ -192,7 +199,8 @@ func increaseHealth(strength):
 	print(health)
 	if max_health < health:
 		max_health += strength
-		$LifePoints.value = max_health
+		#$LifePoints.value = max_health
+		changeFlowerSprite()
 
 
 func _on_ShieldArea_body_entered(body):
@@ -201,3 +209,16 @@ func _on_ShieldArea_body_entered(body):
 
 func _on_ShieldArea_area_entered(area):
 	print("SHIELD DETECTED AREA: "+ str(area))
+
+
+func changeFlowerSprite():
+	if max_health >= 0 and max_health <= 20:
+		$SpriteFlower.texture = one_petal
+	if max_health >= 21 and max_health <= 40:
+		$SpriteFlower.texture = two_petals
+	if max_health >= 41 and max_health <= 60:
+		$SpriteFlower.texture = three_petals
+	if max_health >= 61 and max_health <= 80:
+		$SpriteFlower.texture = four_petals
+	if max_health >= 81 and max_health <= 100:
+		$SpriteFlower.texture = five_petals
