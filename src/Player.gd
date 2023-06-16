@@ -20,11 +20,13 @@ var three_petals: Texture
 var four_petals: Texture
 var five_petals: Texture
 
+
 onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
 onready var powerUp_timer = $PowerUpTimer
 onready var shieldArea: Area2D = $ShieldArea
 onready var flowerSprite = get_node("SpriteFlower")
+onready var animated_sprite = get_node("AnimatedSprite")
 
 export (PackedScene) var projectile_scene
 
@@ -55,9 +57,8 @@ func _ready():
 	three_petals = load("res://assets/plant/flower/Sprite-flower-3petals.png")
 	four_petals = load("res://assets/plant/flower/Sprite-flower-4petals.png")
 	five_petals = load("res://assets/plant/flower/Sprite-flower-5petals.png")
-
 	changeFlowerSprite()
-
+	$AnimatedSprite.play("idle")
 func initialize(container, projectile_container):
 	self.projectile_container = projectile_container
 
@@ -113,12 +114,21 @@ func _input(event):
 	direction = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		direction.x = 1
+		$AnimatedSprite.play("walk")
+		$AnimatedSprite.flip_h = false
 	if Input.is_action_pressed("move_left"):
 		direction.x = -1
+		$AnimatedSprite.play("walk")
+		$AnimatedSprite.flip_h = true
 	if Input.is_action_pressed("move_down"):
 		direction.y = 1
+		$AnimatedSprite.play("walk")
 	if Input.is_action_pressed("move_up"):
 		direction.y = -1
+		$AnimatedSprite.play("walk")
+		
+	if Input.is_action_just_released("move_left") || Input.is_action_just_released("move_right"):
+		$AnimatedSprite.stop()
 	
 	direction = direction.normalized()
 
