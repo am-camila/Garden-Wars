@@ -126,4 +126,5 @@ func _on_WaitEnemyDieTimer_timeout():
 
 func _on_player_dies():
 	$SpringMusicTheme.stop()
+	$GameOver.show()
 	Input.action_press("ui_cancel")
