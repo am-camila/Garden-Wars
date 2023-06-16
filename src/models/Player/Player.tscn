@@ -58,16 +58,14 @@ frames = SubResource( 5 )
 animation = "powerup"
 
 [node name="SpriteFlower" type="Sprite" parent="."]
-position = Vector2( 0, -1 )
+position = Vector2( 0, 5 )
 
 [node name="FireTimer" type="Timer" parent="."]
 wait_time = 0.45
 
 [node name="FirePosition" type="Position2D" parent="."]
-visible = false
 
 [node name="HitArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 17
 collision_mask = 10
 
@@ -76,19 +74,10 @@ position = Vector2( 0, -0.5 )
 shape = SubResource( 2 )
 
 [node name="FireArea" type="Area2D" parent="."]
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FireArea"]
 shape = SubResource( 1 )
-
-[node name="LifePoints" type="ProgressBar" parent="."]
-visible = false
-margin_left = -20.0
-margin_top = -52.0
-margin_right = 20.0
-margin_bottom = -38.0
-percent_visible = false
 
 [node name="LifeTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -118,7 +107,6 @@ limit_bottom = 1800
 position = Vector2( 0, -1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 3 )
 
 [node name="PowerUpTimer" type="Timer" parent="."]
@@ -129,11 +117,9 @@ visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldArea"]
-visible = false
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="ShieldArea"]
-visible = false
 position = Vector2( 5.99998, 6.99998 )
 scale = Vector2( 0.690647, 0.690647 )
 texture = ExtResource( 8 )

@@ -9,6 +9,7 @@ export (float) var VELOCITY:float = 400.0
 var direction:Vector2
 
 func initialize(container, spawn_position:Vector2, direction2:Vector2):
+	$AnimatedSprite.play("spin")
 	container.add_child(self)
 	self.direction = direction2
 	global_position = spawn_position
