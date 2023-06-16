@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sprite-planta-0008.png-221e4739a5b4e1c704e7cae7dffd08db.stex"
+path="res://.import/Sprite-hormiga-0001.png-e966260d268b28513d1f306b3df269ae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/sprites/Sprite-planta-0008.png"
-dest_files=[ "res://.import/Sprite-planta-0008.png-221e4739a5b4e1c704e7cae7dffd08db.stex" ]
+source_file="res://assets/enemies/Sprite-hormiga-0001.png"
+dest_files=[ "res://.import/Sprite-hormiga-0001.png-e966260d268b28513d1f306b3df269ae.stex" ]
 
 [params]
 

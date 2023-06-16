@@ -22,6 +22,7 @@ func _ready():
 	max_health = health
 	$LifeBar.hide()
 	$LifeBar.value = max_health
+	$AnimatedSprite.play("walk")
 
 func set_values(player):
 	self.player = player

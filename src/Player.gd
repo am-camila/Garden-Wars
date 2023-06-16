@@ -199,7 +199,6 @@ func increaseHealth(strength):
 	print(health)
 	if max_health < health:
 		max_health += strength
-		#$LifePoints.value = max_health
 		changeFlowerSprite()
 
 
