@@ -16,13 +16,11 @@ export (PackedScene) var shield_power_up
 export (PackedScene) var life_power_up
 onready var powerUps: Array  = [speed_power_up,hit_power_up,life_power_up]
 
-
 func _ready():
 	$LifeBar.max_value = health
 	max_health = health
 	$LifeBar.hide()
 	$LifeBar.value = max_health
-	$AnimatedSprite.play("walk")
 
 func set_values(player):
 	self.player = player
@@ -36,7 +34,11 @@ func _process(delta):
 	#if speed < 3000:
 	#	speed += delta * speed
 	move_and_slide(movement)
-
+	$AnimatedSprite.play("walk")
+	if direction.x < 0:
+		$AnimatedSprite.flip_h = false
+	else:
+		$AnimatedSprite.flip_h = true
 
 func _on_Area2D_body_entered(body):
 	if body is Projectile:
