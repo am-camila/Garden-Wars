@@ -14,12 +14,20 @@ var direction : Vector2
 # Variables atributos del player
 var max_health
 var can_take_damage = true
+var one_petal: Texture
+var two_petals: Texture
+var three_petals: Texture
+var four_petals: Texture
+var five_petals: Texture
+
 
 onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
 onready var powerUp_timer = $PowerUpTimer
 onready var shieldArea: Area2D = $ShieldArea
 onready var sprite = $Sprite
+onready var flowerSprite = get_node("SpriteFlower")
+onready var animated_sprite = get_node("AnimatedSprite")
 
 export (PackedScene) var projectile_scene
 
@@ -44,9 +52,6 @@ func _ready():
 	GLOBALS.connect("hit",self,"_on_hit_enemy")
 	GLOBALS.connect("wave_end",self,"_on_wave_end")
 	max_health = health
-	$LifePoints.max_value = health
-	$LifePoints.hide()
-	$LifePoints.value = max_health
 	speed = normal_speed
 	damage = normal_damage
 	shieldArea.monitoring = true
@@ -63,8 +68,7 @@ func _process(delta):
 		if max_health > 25:
 			_special_fire()
 			max_health -= 25
-			$LifePoints.value = max_health
-			$LifePoints.show()
+			changeFlowerSprite()
 			return
 		if max_health == 25:
 			$CancelSpecialFire.play()
@@ -111,12 +115,21 @@ func _unhandled_input(event):
 	direction = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		direction.x = 1
+		$AnimatedSprite.play("walk")
+		$AnimatedSprite.flip_h = false
 	if Input.is_action_pressed("move_left"):
 		direction.x = -1
+		$AnimatedSprite.play("walk")
+		$AnimatedSprite.flip_h = true
 	if Input.is_action_pressed("move_down"):
 		direction.y = 1
+		$AnimatedSprite.play("walk")
 	if Input.is_action_pressed("move_up"):
 		direction.y = -1
+		$AnimatedSprite.play("walk")
+		
+	if Input.is_action_just_released("move_left") || Input.is_action_just_released("move_right"):
+		$AnimatedSprite.stop()
 	
 	direction = direction.normalized()
 

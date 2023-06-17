@@ -10,6 +10,7 @@ var direction:Vector2
 var spawn:Vector2
 
 func initialize(container, spawn_position:Vector2, direction2:Vector2):
+	$AnimatedSprite.play("spin")
 	container.add_child(self)
 	self.direction = direction2
 	spawn = spawn_position

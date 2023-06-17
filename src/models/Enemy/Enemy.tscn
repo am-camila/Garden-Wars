@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://models/Scripts/Flash.gdshader" type="Shader" id=1]
 [ext_resource path="res://models/Enemy/Enemy.gd" type="Script" id=2]
@@ -6,6 +6,16 @@
 [ext_resource path="res://models/PowerUps/SpeedPowerUp.tscn" type="PackedScene" id=4]
 [ext_resource path="res://models/PowerUps/ShieldPowerUp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://models/PowerUps/LifePowerUp.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/enemies/Sprite-hormiga-0002.png" type="Texture" id=7]
+[ext_resource path="res://assets/enemies/Sprite-hormiga-0001.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
 
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
@@ -34,6 +44,12 @@ hit_power_up = ExtResource( 3 )
 shield_power_up = ExtResource( 5 )
 life_power_up = ExtResource( 6 )
 
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 7, 16 )
+scale = Vector2( 0.648148, 1.00556 )
+frames = SubResource( 3 )
+animation = "walk"
+
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 5 )
 position = Vector2( 6, 18 )
@@ -52,6 +68,7 @@ position = Vector2( 7, 16 )
 shape = SubResource( 2 )
 
 [node name="LifeBar" type="ProgressBar" parent="."]
+visible = false
 margin_left = -9.0
 margin_top = -46.0
 margin_right = 23.0
