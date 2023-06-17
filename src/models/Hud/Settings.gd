@@ -23,8 +23,8 @@ func initialize_data():
 	genera_bar.value = SAVE.game_data.general_volumen
 	music_bar.value = SAVE.game_data.music_volumen
 	sfx_bar.value = SAVE.game_data.sfx_volumen
-	blinghtness_btn.selected = SAVE.game_data.blindness
-	blinghtness_intensity.value = SAVE.game_data.blindness_intensity
+	#blinghtness_btn.selected = SAVE.game_data.blindness
+	#blinghtness_intensity.value = SAVE.game_data.blindness_intensity
 
 func _on_ModeOption_item_selected(index):
 	SETTINGS.change_display_mode(index)

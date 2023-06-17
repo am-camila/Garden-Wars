@@ -43,6 +43,5 @@ func load_data():
 	AudioServer.set_bus_volume_db(0,SAVE.game_data.general_volumen)
 	AudioServer.set_bus_volume_db(1,SAVE.game_data.music_volumen)
 	AudioServer.set_bus_volume_db(2,SAVE.game_data.sfx_volumen)
-	emit_signal("change_blindness",SAVE.game_data.blindness)
-	emit_signal("change_blindness_intensity",SAVE.game_data.blindness_intensity)
-
+	#emit_signal("change_blindness",SAVE.game_data.blindness)
+	#emit_signal("change_blindness_intensity",SAVE.game_data.blindness_intensity)
