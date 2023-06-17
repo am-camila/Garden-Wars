@@ -22,7 +22,7 @@ export (PackedScene) var hit_power_up
 export (PackedScene) var shield_power_up
 export (PackedScene) var life_power_up
 onready var powerUps: Array  = [speed_power_up,hit_power_up,life_power_up]
-onready var sprite = $Sprite
+onready var sprite = $AnimatedSprite
 
 func _ready():
 	$LifeBar.max_value = health
@@ -41,7 +41,11 @@ func _process(delta):
 	var direction_to_target = (player.position - position).normalized()
 	var movement_to_target = direction_to_target * speed * delta
 	position += movement_to_target
-
+	$AnimatedSprite.play("walk")
+	if direction_to_target.x < 0:
+		$AnimatedSprite.flip_h = false
+	else:
+		$AnimatedSprite.flip_h = true
 
 func _on_Area2D_body_entered(body):
 	if body is Projectile:
@@ -61,7 +65,7 @@ func _on_Area2D_body_entered(body):
 
 
 func hit_color():
-	sprite.material.set_shader_param("flash_modifier",0.7)
+	#sprite.material.set_shader_param("flash_modifier",0.7)
 	$FlashTimer.start()
 
 func random_powerUp():
@@ -90,4 +94,5 @@ func _on_CollisionParents_area_exited(area):
 
 
 func _on_FlashTimer_timeout():
-	$Sprite.material.set_shader_param("flash_modifier",0)
+	#$Sprite.material.set_shader_param("flash_modifier",0)
+	pass

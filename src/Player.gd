@@ -24,8 +24,7 @@ var five_petals: Texture
 onready var fire_position = $FirePosition
 onready var fire_timer = $FireTimer
 onready var powerUp_timer = $PowerUpTimer
-onready var shieldArea: Area2D = $ShieldArea
-onready var sprite = $Sprite
+onready var sprite = $AnimatedSprite
 onready var flowerSprite = get_node("SpriteFlower")
 onready var animated_sprite = get_node("AnimatedSprite")
 
@@ -47,15 +46,21 @@ var flash = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	max_health = health
 	reset_hit_count()
 	fire_timer.connect("timeout", self, "fire_at_enemy")
 	GLOBALS.connect("hit",self,"_on_hit_enemy")
 	GLOBALS.connect("wave_end",self,"_on_wave_end")
-	max_health = health
 	speed = normal_speed
 	damage = normal_damage
-	shieldArea.monitoring = true
-	sprite.material.set_shader_param("flash_modifier",0 )
+	#sprite.material.set_shader_param("flash_modifier",0 )
+	one_petal = load("res://assets/plant/flower/Sprite-flower-1petal.png")
+	two_petals = load("res://assets/plant/flower/Sprite-flower-2petals.png")
+	three_petals = load("res://assets/plant/flower/Sprite-flower-3petals.png")
+	four_petals = load("res://assets/plant/flower/Sprite-flower-4petals.png")
+	five_petals = load("res://assets/plant/flower/Sprite-flower-5petals.png")
+	changeFlowerSprite()
+	$AnimatedSprite.play("idle")
 
 
 func _process(delta):
@@ -141,9 +146,9 @@ func check_health():
 		return
 
 
-#func _on_LifeTimer_timeout():
-#	can_take_damage = true
-#	$LifeTimer.stop()
+func _on_LifeTimer_timeout():
+	can_take_damage = true
+	$LifeTimer.stop()
 
 
 func _special_fire():
@@ -177,8 +182,7 @@ func increaseDamage(duration, strength):
 	if damage == normal_damage:
 		damage = damage * strength
 
-func activate_shield(duration):
-	shieldArea.monitoring = false
+
 
 
 func _on_PowerUpTimer_timeout():
@@ -188,24 +192,22 @@ func _on_PowerUpTimer_timeout():
 func restore_normal_attributes():
 	speed = normal_speed
 	damage = normal_damage
-	shieldArea.monitoring = true
 
 
 func increaseHealth(strength):
 	if max_health < health:
 		max_health += strength
-		$LifePoints.value = max_health
+		changeFlowerSprite()
 
 
 func _on_HitArea_area_entered(area):
 	if area is Enemy:
 		if can_take_damage:
-			max_health -= area.damage
-			$LifePoints.value = max_health
-			$LifePoints.show()
+			max_health -= 20
+			changeFlowerSprite()
 			can_take_damage = false
-#			$LifeTimer.start()
-			$Sprite/HitTimer.start()
+			$LifeTimer.start()
+			#$Sprite/HitTimer.start()
 
 
 func _on_FireArea_area_entered(area):
@@ -222,18 +224,36 @@ func _on_FireArea_area_exited(area):
 	enemies_count -= 1
 
 
-func _on_HitTimer_timeout():
-	if flash > 0:
-		flash = 0
-	else:
-		 flash = 0.7
-	sprite.material.set_shader_param("flash_modifier", flash)
-	hit_timer -= 1
-	if hit_timer == 0:
-		$Sprite/HitTimer.stop()
-		reset_hit_count()
-		can_take_damage = true
+#func _on_HitTimer_timeout():
+#	if flash > 0:
+#		flash = 0
+#	else:
+#		 flash = 0.7
+#	#sprite.material.set_shader_param("flash_modifier", flash)
+#	hit_timer -= 1
+#	if hit_timer == 0:
+#		#$Sprite/HitTimer.stop()
+#		reset_hit_count()
+#		can_take_damage = true
 
 
 func reset_hit_count():
 	hit_timer = 6
+
+
+func changeFlowerSprite():
+	if max_health >= 0 and max_health <= 20:
+		$SpriteFlower.position = $FlowerPosition.position
+		$SpriteFlower.texture = one_petal
+	if max_health >= 21 and max_health <= 40:
+		$SpriteFlower.position = $FlowerPosition.position
+		$SpriteFlower.texture = two_petals
+	if max_health >= 41 and max_health <= 60:
+		$SpriteFlower.position = $FlowerPosition.position
+		$SpriteFlower.texture = three_petals
+	if max_health >= 61 and max_health <= 80:
+		$SpriteFlower.position = $FlowerPosition.position
+		$SpriteFlower.texture = four_petals
+	if max_health >= 81 and max_health <= 100:
+		$SpriteFlower.position = $FlowerPosition.position
+		$SpriteFlower.texture = five_petals

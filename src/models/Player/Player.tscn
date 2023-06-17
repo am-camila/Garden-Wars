@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/songs/Fire2.ogg" type="AudioStream" id=5]
 [ext_resource path="res://assets/songs/Special_Fire.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/songs/Cancel_special_fire.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/shield/spr_shield.png" type="Texture" id=8]
 [ext_resource path="res://assets/plant/pot/walk/Sprite-planta-walk-right2.png" type="Texture" id=9]
 [ext_resource path="res://assets/img/sprites/Sprite-planta-0009.png" type="Texture" id=10]
 [ext_resource path="res://assets/plant/pot/walk/Sprite-planta-walk-right1.png" type="Texture" id=11]
@@ -112,14 +111,14 @@ shader = SubResource( 6 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 34, 34 )
 
-[sub_resource type="CircleShape2D" id=4]
-radius = 174.645
-
 [node name="Player" type="KinematicBody2D"]
 light_mask = 513
 position = Vector2( 490, 513 )
 script = ExtResource( 2 )
 projectile_scene = ExtResource( 3 )
+
+[node name="FlowerPosition" type="Position2D" parent="."]
+position = Vector2( -4, -50 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
@@ -128,7 +127,7 @@ animation = "powerup"
 [node name="SpriteFlower" type="Sprite" parent="."]
 position = Vector2( 0, 5 )
 
-[node name="HitTimer" type="Timer" parent="Sprite"]
+[node name="Sprite@HitTimer" type="Timer" parent="."]
 wait_time = 0.2
 
 [node name="FireTimer" type="Timer" parent="."]
@@ -184,25 +183,8 @@ shape = SubResource( 3 )
 [node name="PowerUpTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="ShieldArea" type="Area2D" parent="."]
-visible = false
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldArea"]
-shape = SubResource( 4 )
-
-[node name="Sprite" type="Sprite" parent="ShieldArea"]
-position = Vector2( 5.99998, 6.99998 )
-scale = Vector2( 0.690647, 0.690647 )
-texture = ExtResource( 8 )
-
-[connection signal="timeout" from="Sprite/HitTimer" to="." method="_on_HitTimer_timeout"]
 [connection signal="area_entered" from="HitArea" to="." method="_on_HitArea_area_entered"]
 [connection signal="area_entered" from="FireArea" to="." method="_on_FireArea_area_entered"]
 [connection signal="area_exited" from="FireArea" to="." method="_on_FireArea_area_exited"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
 [connection signal="timeout" from="PowerUpTimer" to="." method="_on_PowerUpTimer_timeout"]
-[connection signal="area_entered" from="ShieldArea" to="." method="_on_ShieldArea_area_entered"]
-[connection signal="body_entered" from="ShieldArea" to="." method="_on_ShieldArea_body_entered"]
-[connection signal="child_entered_tree" from="ShieldArea/CollisionShape2D" to="ShieldArea" method="_on_CollisionShape2D_child_entered_tree"]
-[connection signal="tree_entered" from="ShieldArea/CollisionShape2D" to="ShieldArea" method="_on_CollisionShape2D_tree_entered"]
