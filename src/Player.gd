@@ -53,7 +53,7 @@ func _ready():
 	GLOBALS.connect("wave_end",self,"_on_wave_end")
 	speed = normal_speed
 	damage = normal_damage
-	#sprite.material.set_shader_param("flash_modifier",0 )
+	sprite.material.set_shader_param("flash_modifier",0 )
 	one_petal = load("res://assets/plant/flower/Sprite-flower-1petal.png")
 	two_petals = load("res://assets/plant/flower/Sprite-flower-2petals.png")
 	three_petals = load("res://assets/plant/flower/Sprite-flower-3petals.png")
@@ -207,7 +207,7 @@ func _on_HitArea_area_entered(area):
 			changeFlowerSprite()
 			can_take_damage = false
 			$LifeTimer.start()
-			#$Sprite/HitTimer.start()
+			$HitTimer.start()
 
 
 func _on_FireArea_area_entered(area):
@@ -224,17 +224,17 @@ func _on_FireArea_area_exited(area):
 	enemies_count -= 1
 
 
-#func _on_HitTimer_timeout():
-#	if flash > 0:
-#		flash = 0
-#	else:
-#		 flash = 0.7
-#	#sprite.material.set_shader_param("flash_modifier", flash)
-#	hit_timer -= 1
-#	if hit_timer == 0:
-#		#$Sprite/HitTimer.stop()
-#		reset_hit_count()
-#		can_take_damage = true
+func _on_HitTimer_timeout():
+	if flash > 0:
+		flash = 0
+	else:
+		 flash = 0.7
+	sprite.material.set_shader_param("flash_modifier", flash)
+	hit_timer -= 1
+	if hit_timer == 0:
+		$HitTimer.stop()
+		reset_hit_count()
+		can_take_damage = true
 
 
 func reset_hit_count():
