@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://models/Scripts/Flash.gdshader" type="Shader" id=1]
 [ext_resource path="res://models/Enemy/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://models/PowerUps/HitDamagePowerUp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://models/PowerUps/SpeedPowerUp.tscn" type="PackedScene" id=4]
@@ -7,6 +8,12 @@
 [ext_resource path="res://models/PowerUps/LifePowerUp.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/enemies/Sprite-hormiga-0002.png" type="Texture" id=7]
 [ext_resource path="res://assets/enemies/Sprite-hormiga-0001.png" type="Texture" id=8]
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/flash_color = Color( 0.890196, 0.117647, 0.117647, 1 )
+shader_param/flash_modifier = 1.0
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
@@ -35,6 +42,7 @@ shield_power_up = ExtResource( 5 )
 life_power_up = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 4 )
 position = Vector2( 7, 16 )
 scale = Vector2( 0.648148, 1.00556 )
 frames = SubResource( 3 )
