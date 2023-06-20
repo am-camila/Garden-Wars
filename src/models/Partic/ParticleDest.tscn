@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://models/PowerUps/PowerUpProcessMaterial.tres" type="Material" id=1]
+[ext_resource path="res://assets/img/Nueva carpeta/destello.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Particles2D" type="Particles2D"]
+material = SubResource( 2 )
+scale = Vector2( 0.2, 0.2 )
+process_material = ExtResource( 1 )
+texture = ExtResource( 2 )

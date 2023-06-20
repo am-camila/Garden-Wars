@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/img/sprites/PowerUps/Life.png" type="Texture" id=1]
 [ext_resource path="res://models/PowerUps/LifePowerUp.gd" type="Script" id=2]
+[ext_resource path="res://models/Partic/ParticleDest.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0312
 
 [node name="LifePowerUp" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="Particles2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( -5.96046e-08, -1.78814e-07 )
+scale = Vector2( 0.2, 0.2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.5, -1 )
