@@ -203,6 +203,7 @@ func increaseHealth(strength):
 func _on_HitArea_area_entered(area):
 	if area is Enemy:
 		if can_take_damage:
+			$AnimatedSprite.play("hit")
 			max_health -= 20
 			changeFlowerSprite()
 			can_take_damage = false
