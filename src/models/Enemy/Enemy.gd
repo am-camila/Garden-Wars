@@ -50,20 +50,21 @@ func _process(delta):
 
 func _on_Area2D_body_entered(body):
 	if body is Projectile:
-		$Hit.play()
 		max_health -= player.damage
 		hit_color()
 		speed = speed * 0.55
 		$LifeBar.value = max_health
+		$Hit.play()
 		GLOBALS.emit_signal("hit")
 		if max_health < 1:
 			GLOBALS.emit_signal("enemy_die")
+			
 			if randf()*100 <= powerupChance:
 				var powerUp = random_powerUp()
 				powerUp.position = position
 				get_parent().add_child(powerUp)
 				GLOBALS.emit_signal("spawn_powerup")
-			queue_free()
+			$DieTimer.start()
 
 
 func hit_color():
@@ -97,3 +98,9 @@ func _on_CollisionParents_area_exited(area):
 
 func _on_FlashTimer_timeout():
 	$AnimatedSprite.material.set_shader_param("flash_modifier",0)
+
+
+
+
+func _on_DieTimer_timeout():
+	queue_free()
