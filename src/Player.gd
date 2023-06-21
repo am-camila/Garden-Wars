@@ -53,7 +53,7 @@ func _ready():
 	GLOBALS.connect("wave_end",self,"_on_wave_end")
 	speed = normal_speed
 	damage = normal_damage
-	sprite.material.set_shader_param("flash_modifier",0 )
+	sprite.material.set_shader_param("enabled",0.0)
 	one_petal = load("res://assets/plant/flower/Sprite-flower-1petal.png")
 	two_petals = load("res://assets/plant/flower/Sprite-flower-2petals.png")
 	three_petals = load("res://assets/plant/flower/Sprite-flower-3petals.png")
@@ -178,19 +178,24 @@ func increaseSpeed(duration, strength):
 	$PowerUpTimer.wait_time = duration
 	if speed == normal_speed:
 		speed = speed * strength
+	take_powerup()
 
 func increaseDamage(duration, strength):
 	$PickUp.play()
 	$PowerUpTimer.wait_time = duration
 	if damage == normal_damage:
 		damage = damage * strength
+	take_powerup()
 
 
-
+func take_powerup():
+	powerUp_active = true
+	sprite.material.set_shader_param("enabled",1.0)
 
 func _on_PowerUpTimer_timeout():
 	powerUp_active = false
 	restore_normal_attributes()
+	sprite.material.set_shader_param("enabled",0.0)
 
 func restore_normal_attributes():
 	speed = normal_speed
@@ -238,11 +243,14 @@ func _on_HitTimer_timeout():
 	else:
 		 flash = 0.7
 	sprite.material.set_shader_param("flash_modifier", flash)
+	sprite.material.set_shader_param("enabled",2.0)
 	hit_timer -= 1
 	if hit_timer == 0:
 		$HitTimer.stop()
 		reset_hit_count()
 		can_take_damage = true
+		if powerUp_active:
+			sprite.material.set_shader_param("enabled",1.0)
 
 
 func reset_hit_count():

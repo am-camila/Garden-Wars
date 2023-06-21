@@ -16,8 +16,13 @@
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 8 )
+shader_param/enabled = 0.0
+shader_param/line_thickness = 1.5
+shader_param/sin_frequency = 0.5
+shader_param/sin_offset = 0.0
+shader_param/light_offset = 0.5
 shader_param/flash_color = Color( 0.8, 0.815686, 0.792157, 1 )
-shader_param/flash_modifier = 1.0
+shader_param/flash_modifier = 0.0
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {

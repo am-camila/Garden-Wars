@@ -1,10 +1,48 @@
+
+
 shader_type canvas_item;
+
+uniform float enabled : hint_range(0,3,1) = 0.0; 
+uniform float line_thickness : hint_range(0, 20) = 1.0;    // thickness of the line
+uniform float sin_frequency : hint_range(0.1, 2.0) = 0.5;  // frequency of the rainbow
+uniform float sin_offset : hint_range(0.0, 360.0) = 0.0;   // offset of the rainbow, useful to differentiate objects using the same shader
+uniform float light_offset : hint_range(0.0, 1.0) = 0.5;   // this offsets all color channels; if set to 0 only red green and blue colors will be shown.
 
 uniform vec4 flash_color: hint_color = vec4(1.0);
 uniform float flash_modifier: hint_range(0.0,1.0) = 1;
 
 void fragment() {
+	//multicolor 1.0
+	if (enabled == 1.0){
+		vec2 size = TEXTURE_PIXEL_SIZE * line_thickness;
+	
+	float outline = texture(TEXTURE, UV + vec2(-size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+	outline = min(outline, 1.0);
+	
+	vec4 animated_line_color = vec4(light_offset + sin(2.0*3.14*sin_frequency*TIME),
+							   light_offset + sin(2.0*3.14*sin_frequency*TIME + radians(120.0)),
+							   light_offset + sin(2.0*3.14*sin_frequency*TIME + radians(240.0)),
+							   1.0);
+	
 	vec4 color = texture(TEXTURE, UV);
-	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
-	COLOR = color;
+	COLOR = mix(color, animated_line_color, outline - color.a);
+	}
+	//normal 0.0
+	else if(enabled == 0.0){
+		vec4 color = texture(TEXTURE, UV);
+		COLOR = color;
+	}
+	//hit 2.0
+	else if(enabled == 2.0){
+		vec4 color = texture(TEXTURE, UV);
+		color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
+		COLOR = color;
+	}
 }

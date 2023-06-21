@@ -25,7 +25,7 @@ onready var powerUps: Array  = [speed_power_up,hit_power_up,life_power_up]
 
 
 func _ready():
-	$AnimatedSprite.material.set_shader_param("flash_modifier",0.0)
+	$AnimatedSprite.material.set_shader_param("enabled",0.0)
 	$LifeBar.max_value = health
 	max_health = health
 	$LifeBar.hide()
@@ -69,6 +69,7 @@ func _on_Area2D_body_entered(body):
 
 func hit_color():
 	$AnimatedSprite.material.set_shader_param("flash_modifier",0.7)
+	$AnimatedSprite.material.set_shader_param("enabled",2.0)
 	$FlashTimer.start()
 
 func random_powerUp():
@@ -97,7 +98,7 @@ func _on_CollisionParents_area_exited(area):
 
 
 func _on_FlashTimer_timeout():
-	$AnimatedSprite.material.set_shader_param("flash_modifier",0)
+	$AnimatedSprite.material.set_shader_param("enabled",0.0)
 
 
 
