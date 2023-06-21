@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://models/Scripts/Flash.gdshader" type="Shader" id=1]
 [ext_resource path="res://models/Enemy/Enemy.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://models/PowerUps/LifePowerUp.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/enemies/Sprite-hormiga-0002.png" type="Texture" id=7]
 [ext_resource path="res://assets/enemies/Sprite-hormiga-0001.png" type="Texture" id=8]
+[ext_resource path="res://assets/songs/enemy_damage.wav" type="AudioStream" id=9]
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
@@ -78,6 +79,10 @@ scale = Vector2( 0.5, 1 )
 
 [node name="FlashTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+bus = "SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered" flags=3]
 [connection signal="area_entered" from="CollisionParents" to="." method="_on_CollisionParents_area_entered"]

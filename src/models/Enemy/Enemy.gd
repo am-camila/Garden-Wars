@@ -50,6 +50,7 @@ func _process(delta):
 
 func _on_Area2D_body_entered(body):
 	if body is Projectile:
+		$Hit.play()
 		max_health -= player.damage
 		hit_color()
 		speed = speed * 0.55
@@ -96,4 +97,3 @@ func _on_CollisionParents_area_exited(area):
 
 func _on_FlashTimer_timeout():
 	$AnimatedSprite.material.set_shader_param("flash_modifier",0)
-	pass

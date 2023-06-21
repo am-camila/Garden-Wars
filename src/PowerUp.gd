@@ -13,7 +13,7 @@ func _ready():
 
 func applyPowerUp(player:Player, duration:float, strength:float):
 	queue_free()
-	$PickUp.play()
+	
 	player.animated_sprite.play("powerup")
 	player.powerUp_timer.wait_time = duration
 	player.powerUp_timer.start()

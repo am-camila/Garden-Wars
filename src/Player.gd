@@ -119,6 +119,7 @@ func _on_hit_enemy():
 func _unhandled_input(event):
 	direction = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
+		
 		direction.x = 1
 		$AnimatedSprite.play("walk")
 		$AnimatedSprite.flip_h = false
@@ -132,11 +133,11 @@ func _unhandled_input(event):
 	if Input.is_action_pressed("move_up"):
 		direction.y = -1
 		$AnimatedSprite.play("walk")
-		
 	if Input.is_action_just_released("move_left") || Input.is_action_just_released("move_right"):
 		$AnimatedSprite.stop()
-	
+			
 	direction = direction.normalized()
+	
 
 
 
@@ -173,11 +174,13 @@ func _special_fire():
 
 
 func increaseSpeed(duration, strength):
+	$PickUp.play()
 	$PowerUpTimer.wait_time = duration
 	if speed == normal_speed:
 		speed = speed * strength
 
 func increaseDamage(duration, strength):
+	$PickUp.play()
 	$PowerUpTimer.wait_time = duration
 	if damage == normal_damage:
 		damage = damage * strength
@@ -195,6 +198,7 @@ func restore_normal_attributes():
 
 
 func increaseHealth(strength):
+	$PickUp.play()
 	if max_health < health:
 		max_health += strength
 		changeFlowerSprite()
@@ -204,11 +208,13 @@ func _on_HitArea_area_entered(area):
 	if area is Enemy:
 		if can_take_damage:
 			$AnimatedSprite.play("hit")
+			$Hit.play()
 			max_health -= 20
 			changeFlowerSprite()
 			can_take_damage = false
 			$LifeTimer.start()
 			$HitTimer.start()
+
 
 
 func _on_FireArea_area_entered(area):
@@ -226,6 +232,7 @@ func _on_FireArea_area_exited(area):
 
 
 func _on_HitTimer_timeout():
+	$Hit.stop()
 	if flash > 0:
 		flash = 0
 	else:
@@ -258,3 +265,5 @@ func changeFlowerSprite():
 	if max_health >= 81 and max_health <= 100:
 		$SpriteFlower.position = $FlowerPosition.position
 		$SpriteFlower.texture = five_petals
+
+
