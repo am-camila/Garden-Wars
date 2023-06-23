@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dagger-woosh.ogg-a8d2eb9931e2272dd293ce6221399146.oggstr"
+
+[deps]
+
+source_file="res://assets/songs/dagger-woosh.ogg"
+dest_files=[ "res://.import/dagger-woosh.ogg-a8d2eb9931e2272dd293ce6221399146.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -44,6 +44,9 @@ var damage
 var hit_timer
 var flash = 0
 var can_move = false
+
+var fire_sound:AudioStreamPlayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	max_health = health
@@ -100,23 +103,24 @@ func fire_at_enemy():
 					target = elem
 	if is_instance_valid(target):
 		var proj_instance = projectile_scene.instance()
-		var num_rand = randi() % 2
-		if num_rand:
-			$Fire1Audio.play()
+		if normal_damage != damage:
+			fire_sound = $PowerUpHit
 		else:
-			$Fire2Audio.play()
+			var num_rand = randi() % 2
+			if num_rand:
+				fire_sound = $Fire1Audio
+			else:
+				fire_sound = $Fire2Audio
+			
+		fire_sound.play()
 		proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(target.global_position))	
 
 
 func _on_wave_end():
-	$Fire1Audio.stop()
-	$Fire2Audio.stop()
+	fire_sound.stop()
 
 func _on_hit_enemy():
-	$Fire1Audio.stop()
-	$Fire2Audio.stop()
-
-
+	fire_sound.stop()
 
 func _unhandled_input(event):
 	direction = Vector2.ZERO
