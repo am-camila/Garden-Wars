@@ -3,7 +3,7 @@ extends PowerUp
 class_name LifePowerUp
 
 func _ready():
-	strength = 25
+	strength = 20
 
 func applyPowerUp(player, duration, strength):
 	player.increaseHealth(strength)

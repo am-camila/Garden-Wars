@@ -142,7 +142,8 @@ func _on_WaitEnemyDieTimer_timeout():
 
 func _on_player_dies():
 	$SpringMusicTheme.stop()
-	$GameOver.show()
+	#$GameOver.show()
+	get_tree().change_scene("res://models/GameOver/GameOver.tscn")
 	Input.action_press("ui_cancel")
 
 
@@ -183,5 +184,5 @@ func _on_hide_loading():
 func _on_start_game():
 	$HUD.hide()
 	new_game()
-	deleteEnemies()
+	#deleteEnemies()
 	
