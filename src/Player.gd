@@ -4,7 +4,7 @@ class_name Player
 
 export var normal_speed = 500
 export var normal_damage = 25
-export var health = 100
+export var health = 5
 
 
 var velocity : Vector2
