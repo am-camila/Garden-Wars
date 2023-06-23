@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-signal start_game
+
 
 func _ready():
 	$HubTheme.play()
@@ -23,14 +23,14 @@ func update_score(score):
 	$ScoreLabel.text = str(score)
 
 func _on_StartButton_pressed():
-	$HubTheme.stop()
-	$VBoxContainer/StartButton.hide()
-	$VBoxContainer/ExitButton.hide()
-	$VBoxContainer/SettingsButton.hide()
-	$MarginContainer/Footer.hide()
-	$Background.hide()
-	emit_signal("start_game")
-	$Title.hide()
+#	$HubTheme.stop()
+#	$VBoxContainer/StartButton.hide()
+#	$VBoxContainer/ExitButton.hide()
+#	$VBoxContainer/SettingsButton.hide()
+#	$MarginContainer/Footer.hide()
+#	$Background.hide()
+	GLOBALS.emit_signal("start_game")
+#	$Title.hide()
 
 func _on_MessageTimer_timeout():
 	$Title.hide()
@@ -42,3 +42,6 @@ func _on_ExitButton_pressed():
 
 func _on_SettingsButton_pressed():
 	$Settings.popup_centered()
+
+func music_stop():
+	$HubTheme.stop()

@@ -18,7 +18,7 @@ export var time_per_wave = 10
 var sleep_global_time = 5
 
 #segundos de espera entre oleada
-var sleep_wave_timer = 5
+var sleep_wave_timer = 3
 
 #oleada actual
 var current_wave = 1
@@ -33,26 +33,28 @@ var text_wave_on = false
 
 var wave_on = true
 
+
 func _ready():
 	SAVE.load_data()
 	randomize()
 	$HudDatos/ExpBar.hide()
+	$Loading.hide()
 	GLOBALS.connect("enemy_die",self,"_on_enemy_dies")
 	GLOBALS.connect("player_die",self,"_on_player_dies")
 	GLOBALS.connect("wave_text",self,"_on_wave_text")
 	GLOBALS.connect("reset_game",self,"_on_reset_game")
 	SETTINGS.connect("change_blindness",self,"_on_change_blindness")
 	SETTINGS.connect("change_blindness_intensity",self,"_on_change_blindness_intensity")
+	GLOBALS.connect("hide_load",self,"_on_hide_loading")
+	GLOBALS.connect("start_game",self,"_on_start_game")
 
 
 
 func new_game():
 	#$ExpBar.show()
-	time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
-	player.initialize(self, self)
-	see_wave_text()	
-	text_wave_on = true
-	$HUD.show_message("Get Ready")
+	$Loading.show()
+	$Loading.start()
+
 
 
 
@@ -81,6 +83,8 @@ func _on_EnemiesTimer_timeout():
 		enemy_count+=1
 		time_current_wave+=1
 		time_wave -=1
+		
+		
 #		$HudDatos/TimerText.text = "Next Wave in: " + str(time_wave)
 
 
@@ -103,6 +107,7 @@ func _on_PlayWaveTimer_timeout():
 func see_wave_text():
 	if enemy_count == 0:
 		player.enemies = []
+		time_current_wave = 0
 		$HudDatos/NumberWaveTimer/NumberWave.show()
 		$HudDatos/NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
 		$HudDatos/NumberWaveTimer.start()
@@ -163,3 +168,17 @@ func _on_change_blindness(value):
 
 func _on_change_blindness_intensity(value):
 	$BlindnessFilter.material.set_shader_param("intensity",value)
+
+func _on_hide_loading():
+	$Loading.hide()
+	$HUD.music_stop()
+	time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
+	player.initialize(self, self)
+	see_wave_text()	
+	text_wave_on = true
+	$HUD.show_message("Get Ready")
+	player.set_move()
+
+func _on_start_game():
+	$HUD.hide()
+	new_game()

@@ -43,7 +43,7 @@ var speed
 var damage
 var hit_timer
 var flash = 0
-
+var can_move = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	max_health = health
@@ -64,19 +64,21 @@ func _ready():
 
 
 func _process(delta):
-	velocity.x = direction.x * speed
-	velocity.y = direction.y * speed
+	if can_move:
+		velocity.x = direction.x * speed
+		velocity.y = direction.y * speed
+		
+		velocity = move_and_slide(velocity)
 	
-	velocity = move_and_slide(velocity)
 	
-	if Input.is_action_just_pressed("special_attack"):
-		if max_health > 25:
-			_special_fire()
-			max_health -= 25
-			changeFlowerSprite()
-			return
-		if max_health == 25:
-			$CancelSpecialFire.play()
+		if Input.is_action_just_pressed("special_attack"):
+			if max_health > 25:
+				_special_fire()
+				max_health -= 25
+				changeFlowerSprite()
+				return
+			if max_health == 25:
+				$CancelSpecialFire.play()
 		
 	check_health()
 
@@ -275,3 +277,5 @@ func changeFlowerSprite():
 		$SpriteFlower.texture = five_petals
 
 
+func set_move():
+	can_move= true

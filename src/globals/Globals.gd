@@ -8,6 +8,8 @@ signal spawn_powerup
 signal restoreAttributes
 signal wave_text
 signal reset_game
+signal start_game
+signal hide_load
 
 func _ready():
 	randomize()
