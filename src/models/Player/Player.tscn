@@ -132,7 +132,7 @@ script = ExtResource( 2 )
 projectile_scene = ExtResource( 3 )
 
 [node name="FlowerPosition" type="Position2D" parent="."]
-position = Vector2( -4, -50 )
+position = Vector2( -4, -42 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 8 )

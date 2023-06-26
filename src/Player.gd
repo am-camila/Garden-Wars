@@ -210,7 +210,9 @@ func restore_normal_attributes():
 
 func increaseHealth(strength):
 	$PickUp.play()
-	if max_health < health:
+	if max_health + strength > health:
+		max_health = health
+	else:
 		max_health += strength
 		changeFlowerSprite()
 

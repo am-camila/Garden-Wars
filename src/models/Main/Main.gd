@@ -1,6 +1,8 @@
 extends Node
 
-export var enemy_scene: PackedScene
+export var enemy_ant_scene: PackedScene
+export var enemy_snail_scene: PackedScene
+
 onready var player = $Player
 
 var music_on = false
@@ -70,7 +72,16 @@ func _on_EnemiesTimer_timeout():
 		$HudDatos/WaitEnemyDieTimer.start()
 		return
 	if wave_on:
-		var enemy = enemy_scene.instance()
+		var enemy
+		var random_value = randf()
+		
+		if random_value < 0.7:  
+			enemy = enemy_ant_scene.instance()
+			#enemy.animated_sprite = $Ant/AntAnimatedSprite  
+
+		else:
+			enemy = enemy_snail_scene.instance()
+			#enemy.animated_sprite = $Snail/SnailAnimatedSprite  
 		
 		enemies.append(enemy)
 		

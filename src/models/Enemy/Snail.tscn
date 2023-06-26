@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://models/Enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/enemies/Sprite-snail-slither2.png" type="Texture" id=2]
+[ext_resource path="res://assets/enemies/Sprite-snail-slither1.png" type="Texture" id=3]
+[ext_resource path="res://models/Scripts/Flash.gdshader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/enabled = 0.0
+shader_param/line_thickness = 1.0
+shader_param/sin_frequency = 0.5
+shader_param/sin_offset = 0.0
+shader_param/light_offset = 0.5
+shader_param/flash_color = Color( 0.890196, 0.117647, 0.117647, 1 )
+shader_param/flash_modifier = 1.0
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 62.0
+height = 0.0
+
+[node name="Enemy" instance=ExtResource( 1 )]
+speed = 100
+health = 100
+damage = 50
+
+[node name="AnimatedSprite" parent="." index="0"]
+material = SubResource( 4 )
+position = Vector2( -5, 13 )
+scale = Vector2( 0.813954, 1.39024 )
+frames = SubResource( 3 )
+animation = "walk"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -6.5, 18 )
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2( -5, 20 )
+
+[node name="CollisionParents" parent="." index="3"]
+position = Vector2( 11, 4 )
+
+[node name="CollisionShape2D" parent="CollisionParents" index="0"]
+position = Vector2( -15, 14 )
+shape = SubResource( 1 )

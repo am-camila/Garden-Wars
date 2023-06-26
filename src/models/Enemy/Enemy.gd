@@ -21,15 +21,13 @@ export (PackedScene) var speed_power_up
 export (PackedScene) var hit_power_up
 export (PackedScene) var shield_power_up
 export (PackedScene) var life_power_up
-onready var powerUps: Array  = [speed_power_up,hit_power_up,life_power_up]
 
+onready var powerUps: Array  = [speed_power_up,hit_power_up,life_power_up]
+onready var animated_sprite = get_node("AnimatedSprite")
 
 func _ready():
-	$AnimatedSprite.material.set_shader_param("enabled",0.0)
-	$LifeBar.max_value = health
-	max_health = health
-	$LifeBar.hide()
-	$LifeBar.value = max_health
+		#animated_sprite.material.set_shader_param("enabled",0.0)
+		max_health = health
 
 func set_values(player, spawn):
 	self.player = player
@@ -42,18 +40,17 @@ func _process(delta):
 	var direction_to_target = (player.position - position).normalized()
 	var movement_to_target = direction_to_target * speed * delta
 	position += movement_to_target
-	$AnimatedSprite.play("walk")
+	animated_sprite.play("walk")
 	if direction_to_target.x < 0:
-		$AnimatedSprite.flip_h = false
+		animated_sprite.flip_h = false
 	else:
-		$AnimatedSprite.flip_h = true
+		animated_sprite.flip_h = true
 
 func _on_Area2D_body_entered(body):
 	if body is Projectile:
 		max_health -= player.damage
 		hit_color()
 		speed = speed * 0.55
-		$LifeBar.value = max_health
 		$Hit.play()
 		GLOBALS.emit_signal("hit")
 		if max_health < 1:
@@ -68,8 +65,8 @@ func _on_Area2D_body_entered(body):
 
 
 func hit_color():
-	$AnimatedSprite.material.set_shader_param("flash_modifier",0.7)
-	$AnimatedSprite.material.set_shader_param("enabled",2.0)
+	animated_sprite.material.set_shader_param("flash_modifier",0.7)
+	animated_sprite.material.set_shader_param("enabled",2.0)
 	$FlashTimer.start()
 
 func random_powerUp():
@@ -98,10 +95,7 @@ func _on_CollisionParents_area_exited(area):
 
 
 func _on_FlashTimer_timeout():
-	$AnimatedSprite.material.set_shader_param("enabled",0.0)
-
-
-
+	animated_sprite.material.set_shader_param("enabled",0.0)
 
 func _on_DieTimer_timeout():
 	queue_free()
