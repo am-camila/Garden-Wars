@@ -75,12 +75,12 @@ func _process(delta):
 	
 	
 		if Input.is_action_just_pressed("special_attack"):
-			if max_health > 25:
+			if max_health > 20:
 				_special_fire()
-				max_health -= 25
+				max_health -= 20
 				changeFlowerSprite()
 				return
-			if max_health == 25:
+			if max_health == 20:
 				$CancelSpecialFire.play()
 		
 	check_health()
@@ -120,7 +120,8 @@ func _on_wave_end():
 	fire_sound.stop()
 
 func _on_hit_enemy():
-	fire_sound.stop()
+	if is_instance_valid(fire_sound):
+		fire_sound.stop()
 
 func _unhandled_input(event):
 	direction = Vector2.ZERO
