@@ -1,13 +1,19 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/img/Nueva carpeta/movement.webm" type="VideoStream" id=1]
 [ext_resource path="res://assets/img/Nueva carpeta/special_attack.webm" type="VideoStream" id=2]
 [ext_resource path="res://assets/img/Nueva carpeta/auto_fire.webm" type="VideoStream" id=3]
 [ext_resource path="res://fonts/Debug.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://models/Loading/Loading.gd" type="Script" id=5]
+[ext_resource path="res://assets/img/keys/S_Key_Dark.png" type="Texture" id=6]
+[ext_resource path="res://assets/img/keys/W_Key_Dark.png" type="Texture" id=7]
+[ext_resource path="res://assets/img/keys/D_Key_Dark.png" type="Texture" id=8]
+[ext_resource path="res://assets/img/keys/F_Key_Dark.png" type="Texture" id=9]
+[ext_resource path="res://assets/img/keys/A_Key_Dark.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 35
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -43,14 +49,34 @@ custom_fonts/font = SubResource( 1 )
 text = "Movement"
 
 [node name="MoveDescription" type="Label" parent="Movement"]
-margin_left = 2.0
-margin_top = 210.0
-margin_right = 252.0
-margin_bottom = 269.0
+margin_left = 3.0
+margin_top = 295.0
+margin_right = 253.0
+margin_bottom = 354.0
 custom_fonts/font = SubResource( 3 )
 text = "Use the W, A, S, and D keys to move the character"
 align = 1
 autowrap = true
+
+[node name="A" type="Sprite" parent="Movement"]
+position = Vector2( 83, 267 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+
+[node name="S" type="Sprite" parent="Movement"]
+position = Vector2( 124, 267 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="D" type="Sprite" parent="Movement"]
+position = Vector2( 166, 267 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="W" type="Sprite" parent="Movement"]
+position = Vector2( 124, 228 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
 
 [node name="AutoFire" type="VideoPlayer" parent="."]
 margin_left = 383.0
@@ -95,14 +121,19 @@ custom_fonts/font = SubResource( 1 )
 text = "Special Attack"
 
 [node name="SpecialAttackDescription" type="Label" parent="SpecialAttack"]
-margin_left = 2.0
-margin_top = 210.0
-margin_right = 252.0
-margin_bottom = 311.0
+margin_left = -4.0
+margin_top = 254.0
+margin_right = 246.0
+margin_bottom = 355.0
 custom_fonts/font = SubResource( 3 )
 text = "Use the F key to perform a powerful attack, but be careful with your life points"
 align = 1
 autowrap = true
+
+[node name="F" type="Sprite" parent="SpecialAttack"]
+position = Vector2( 120, 229 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
 
 [node name="LoadingLabel" type="Label" parent="."]
 margin_left = 8.0
