@@ -122,6 +122,9 @@ func _on_wave_end():
 func _on_hit_enemy():
 	if is_instance_valid(fire_sound):
 		fire_sound.stop()
+	if enemies_count < 1:
+		print("ON  HIT ENEMY"+str(enemies_count))
+		fire_sound.stop()
 
 func _unhandled_input(event):
 	direction = Vector2.ZERO
@@ -203,7 +206,8 @@ func _on_PowerUpTimer_timeout():
 	powerUp_active = false
 	restore_normal_attributes()
 	sprite.material.set_shader_param("enabled",0.0)
-
+	fire_sound.stop()
+		
 func restore_normal_attributes():
 	speed = normal_speed
 	damage = normal_damage
@@ -243,6 +247,7 @@ func _on_FireArea_area_exited(area):
 	if index >= enemies.size():
 		enemies.remove(index)
 	enemies_count -= 1
+	fire_sound.stop()
 
 
 func _on_HitTimer_timeout():

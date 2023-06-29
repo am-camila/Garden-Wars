@@ -160,6 +160,7 @@ shader_param/intensity = 0.5
 script = ExtResource( 3 )
 enemy_ant_scene = ExtResource( 2 )
 enemy_snail_scene = ExtResource( 16 )
+max_enemies = null
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 946, 929.5 )
@@ -183,6 +184,7 @@ rotation = 1.57015
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 
 [node name="Loading" parent="." instance=ExtResource( 15 )]
+visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource( 7 )]
 pause_mode = 2
@@ -237,7 +239,6 @@ scale = Vector2( 1, 3.31 )
 
 [node name="SpringMusicTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-bus = "Music"
 
 [node name="BlindnessFilter" type="Sprite" parent="."]
 material = SubResource( 5 )
