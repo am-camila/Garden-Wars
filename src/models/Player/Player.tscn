@@ -132,7 +132,7 @@ script = ExtResource( 2 )
 projectile_scene = ExtResource( 3 )
 
 [node name="FlowerPosition" type="Position2D" parent="."]
-position = Vector2( -4, -50 )
+position = Vector2( -4, -42 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 8 )
@@ -185,6 +185,13 @@ stream = ExtResource( 6 )
 stream = ExtResource( 10 )
 bus = "SFX"
 
+[node name="PowerUpHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+bus = "SFX"
+
 [node name="Camera" type="Camera2D" parent="."]
 material = SubResource( 7 )
 current = true
@@ -206,13 +213,6 @@ one_shot = true
 
 [node name="HitTimer" type="Timer" parent="."]
 wait_time = 0.2
-
-[node name="Hit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 14 )
-bus = "SFX"
-
-[node name="PowerUpHit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 13 )
 
 [connection signal="area_entered" from="HitArea" to="." method="_on_HitArea_area_entered"]
 [connection signal="area_entered" from="FireArea" to="." method="_on_FireArea_area_entered"]

@@ -71,24 +71,12 @@ _global_script_class_icons={
 config/name="Garden-Wars"
 run/main_scene="res://models/Main/Main.tscn"
 config/icon="res://icon.png"
-config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-GLOBALS="*res://globals/Globals.gd"
 SETTINGS="*res://globals/settings/Settings.gd"
+GLOBALS="*res://globals/Globals.gd"
 SAVE="*res://globals/Save.gd"
-
-[display]
-
-window/size/resizable=false
-window/stretch/mode="viewport"
-window/stretch/aspect="keep"
-
-[global]
-
-audio=false
-rcedit=true
 
 [gui]
 
