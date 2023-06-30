@@ -123,7 +123,6 @@ func _on_hit_enemy():
 	if is_instance_valid(fire_sound):
 		fire_sound.stop()
 	if enemies_count < 1:
-		print("ON  HIT ENEMY"+str(enemies_count))
 		fire_sound.stop()
 
 func _unhandled_input(event):

@@ -22,7 +22,7 @@ shader_param/line_thickness = 1.5
 shader_param/sin_frequency = 0.5
 shader_param/sin_offset = 0.0
 shader_param/light_offset = 0.5
-shader_param/flash_color = Color( 0.8, 0.815686, 0.792157, 1 )
+shader_param/flash_color = Color( 1, 0.117647, 0, 1 )
 shader_param/flash_modifier = 0.0
 
 [sub_resource type="SpriteFrames" id=5]
@@ -170,16 +170,20 @@ wait_time = 2.0
 [node name="Fire1Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -10.0
+bus = "SFX"
 
 [node name="Fire2Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -10.0
+bus = "SFX"
 
 [node name="CancelSpecialFire" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+bus = "SFX"
 
 [node name="SpecialFire" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "SFX"
 
 [node name="PickUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
@@ -187,6 +191,7 @@ bus = "SFX"
 
 [node name="PowerUpHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
+bus = "SFX"
 
 [node name="Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )

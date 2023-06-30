@@ -13,7 +13,7 @@ shader_param/line_thickness = 1.0
 shader_param/sin_frequency = 0.5
 shader_param/sin_offset = 0.0
 shader_param/light_offset = 0.5
-shader_param/flash_color = Color( 0.890196, 0.117647, 0.117647, 1 )
+shader_param/flash_color = Color( 0.8, 0.8, 0.8, 1 )
 shader_param/flash_modifier = 1.0
 
 [sub_resource type="SpriteFrames" id=3]
@@ -52,3 +52,6 @@ position = Vector2( 11, 4 )
 [node name="CollisionShape2D" parent="CollisionParents" index="0"]
 position = Vector2( -15, 14 )
 shape = SubResource( 1 )
+
+[node name="FlashTimer" parent="." index="4"]
+wait_time = 0.2

@@ -5,7 +5,7 @@ func _ready():
 
 
 func _on_CollisionShape2D_tree_entered(body):
-	print()
+	pass
 
 
 func _on_CollisionShape2D_child_entered_tree(node):
