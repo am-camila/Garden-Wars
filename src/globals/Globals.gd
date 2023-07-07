@@ -10,6 +10,7 @@ signal wave_text
 signal reset_game
 signal start_game
 signal hide_load
+signal can_pause
 
 func _ready():
 	randomize()

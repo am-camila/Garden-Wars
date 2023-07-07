@@ -68,7 +68,7 @@ func _on_EnemiesTimer_timeout():
 		$EnemiesTimer.stop()
 		$HudDatos/TimerText.hide()
 		current_wave +=1
-		time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
+		time_wave = round(time_per_wave + (current_wave * time_per_wave * 0.5))
 		$HudDatos/WaitEnemyDieTimer.start()
 		return
 	if wave_on:
@@ -124,6 +124,7 @@ func chose_enemy(num):
 
 #Muestra el texto en pantalla previo a iniciar la oleada
 func see_wave_text():
+	print("Enemigos restantes: "+str(enemy_count))
 	if enemy_count == 0:
 		player.enemies = []
 		time_current_wave = 0
@@ -179,8 +180,8 @@ func _on_reset_game():
 	sleep_global_time = 5
 	sleep_wave_timer = 5
 	current_wave = 1
-	time_wave
 	time_current_wave = 0
+	GLOBALS.emit_signal("can_pause")
 
 
 func _on_change_blindness(value):
@@ -200,6 +201,7 @@ func _on_hide_loading():
 	$HUD.show_message("Get Ready")
 	player.set_move()
 	$SpringMusicTheme.play()
+	GLOBALS.emit_signal("can_pause")
 
 func _on_start_game():
 	$HUD.hide()
