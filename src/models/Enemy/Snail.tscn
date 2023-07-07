@@ -52,6 +52,3 @@ position = Vector2( 11, 4 )
 [node name="CollisionShape2D" parent="CollisionParents" index="0"]
 position = Vector2( -15, 14 )
 shape = SubResource( 1 )
-
-[node name="FlashTimer" parent="." index="4"]
-wait_time = 0.2

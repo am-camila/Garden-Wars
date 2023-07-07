@@ -67,7 +67,6 @@ func _on_EnemiesTimer_timeout():
 		wave_on = false
 		$EnemiesTimer.stop()
 		$HudDatos/TimerText.hide()
-		$HudDatos/PlayWaveTimer.stop()
 		current_wave +=1
 		time_wave = time_per_wave + (current_wave * time_per_wave * 0.5)
 		$HudDatos/WaitEnemyDieTimer.start()
@@ -81,13 +80,13 @@ func _on_EnemiesTimer_timeout():
 		if current_wave == 4:
 			enemy = enemy_beetle_scene.instance()
 		
-		if current_wave > 4 && current_wave < 6:
+		if current_wave > 4 && current_wave <= 6:
 			enemy = chose_enemy(2)
 		
-		if current_wave == 6:
+		if current_wave == 7:
 			enemy = enemy_snail_scene.instance()
 		
-		if current_wave > 6:
+		if current_wave > 7:
 			enemy = chose_enemy(3)
 		
 		
@@ -121,19 +120,6 @@ func chose_enemy(num):
 		enemy = enemy_snail_scene.instance()
 	return enemy
 
-#Timer que ejecuta cada oleada
-func _on_PlayWaveTimer_timeout():
-	if !music_on:
-		music_on = !music_on
-		$SpringMusicTheme.play()
-	if player.health <= 1:
-		return
-#
-#	$HudDatos/TimerText.show()
-#	$HudDatos/TimerText.text = "Next Wave in: " + str(time_wave)
-	$EnemiesTimer.start()
-
-
 
 
 #Muestra el texto en pantalla previo a iniciar la oleada
@@ -152,7 +138,7 @@ func _on_NumberWaveTimer_timeout():
 	if sleep_wave_timer <= 1:
 		$HudDatos/NumberWaveTimer.stop()
 		$HudDatos/NumberWaveTimer/NumberWave.hide()
-		$HudDatos/PlayWaveTimer.start()
+		$EnemiesTimer.start()
 		sleep_wave_timer = sleep_global_time +1
 	sleep_wave_timer -= 1
 	$HudDatos/NumberWaveTimer/NumberWave.text = "Wave #"+str(current_wave)+" start in "+str(sleep_wave_timer)
@@ -213,6 +199,7 @@ func _on_hide_loading():
 	text_wave_on = true
 	$HUD.show_message("Get Ready")
 	player.set_move()
+	$SpringMusicTheme.play()
 
 func _on_start_game():
 	$HUD.hide()
