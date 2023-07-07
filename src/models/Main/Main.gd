@@ -124,7 +124,6 @@ func chose_enemy(num):
 
 #Muestra el texto en pantalla previo a iniciar la oleada
 func see_wave_text():
-	print("Enemigos restantes: "+str(enemy_count))
 	if enemy_count == 0:
 		player.enemies = []
 		time_current_wave = 0
