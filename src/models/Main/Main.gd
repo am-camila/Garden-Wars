@@ -2,6 +2,7 @@ extends Node
 
 export var enemy_ant_scene: PackedScene
 export var enemy_snail_scene: PackedScene
+export var enemy_beetle_scene: PackedScene
 
 onready var player = $Player
 
@@ -73,15 +74,15 @@ func _on_EnemiesTimer_timeout():
 		return
 	if wave_on:
 		var enemy
-		var random_value = randf()
-		
-		if random_value < 0.7:  
+		var random_value = rand_range(1,3)
+		if random_value < 1:  
 			enemy = enemy_ant_scene.instance()
-			#enemy.animated_sprite = $Ant/AntAnimatedSprite  
 
-		else:
+		if random_value >= 1 && random_value <= 2:
 			enemy = enemy_snail_scene.instance()
-			#enemy.animated_sprite = $Snail/SnailAnimatedSprite  
+		
+		if random_value > 2:
+			enemy = enemy_beetle_scene.instance() 
 		
 		enemies.append(enemy)
 		
