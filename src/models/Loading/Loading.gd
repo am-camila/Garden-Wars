@@ -6,7 +6,7 @@ var gif = true
 var num = 0
 
 var english_text = ["Movement","Auto Fire","Special Attack","Use the W, A, S, and D keys to move the character","You dont need to worry about shooting as it is done automatically","Use the F key to perform a powerful attack, but be careful with your life points","Loading","Press the space to continue"]
-var spanish_text = ["Movimiento","Disparo","Ataque Especial","Use las teclas W, A, S, y D para mover al jugador","No necesitas preocuparte por disparar, ya que es automatico","Usa la tecla F para disparar un poderoso ataque, pero cuidado con tu vida","Cargando", "Presione la tecla escape para continuar"]
+var spanish_text = ["Movimiento","Disparo","Ataque Especial","Use las teclas W, A, S, y D para mover al jugador","No necesitas preocuparte por disparar, ya que es automatico","Usa la tecla F para disparar un poderoso ataque, pero cuidado con tu vida","Cargando", "Presione la tecla espacio para continuar"]
 var languaje = []
 
 func _process(delta):
