@@ -246,7 +246,6 @@ func _on_FireArea_area_exited(area):
 	if index >= enemies.size():
 		enemies.remove(index)
 	enemies_count -= 1
-	fire_sound.stop()
 
 
 func _on_HitTimer_timeout():

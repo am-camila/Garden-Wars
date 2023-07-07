@@ -141,6 +141,7 @@ animation = "powerup"
 
 [node name="SpriteFlower" type="Sprite" parent="."]
 position = Vector2( 0, 5 )
+scale = Vector2( 1.6, 1.6 )
 
 [node name="Sprite@HitTimer" type="Timer" parent="."]
 wait_time = 0.2
