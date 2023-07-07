@@ -53,6 +53,7 @@ position = Vector2( 7, 14 )
 scale = Vector2( 0.5, 1 )
 
 [node name="FlashTimer" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
 
 [node name="Hit" type="AudioStreamPlayer" parent="."]

@@ -15,7 +15,7 @@ var enemy_count = 0
 export var max_enemies = 10
 
 
-export var time_per_wave = 10
+export var time_per_wave = 6
 
 
 var sleep_global_time = 5
@@ -74,15 +74,22 @@ func _on_EnemiesTimer_timeout():
 		return
 	if wave_on:
 		var enemy
-		var random_value = rand_range(1,3)
-		if random_value < 1:  
-			enemy = enemy_ant_scene.instance()
-
-		if random_value >= 1 && random_value <= 2:
+		
+		if current_wave < 4:
+			enemy = chose_enemy(1)
+			
+		if current_wave == 4:
+			enemy = enemy_beetle_scene.instance()
+		
+		if current_wave > 4 && current_wave < 6:
+			enemy = chose_enemy(2)
+		
+		if current_wave == 6:
 			enemy = enemy_snail_scene.instance()
 		
-		if random_value > 2:
-			enemy = enemy_beetle_scene.instance() 
+		if current_wave > 6:
+			enemy = chose_enemy(3)
+		
 		
 		enemies.append(enemy)
 		
@@ -96,9 +103,23 @@ func _on_EnemiesTimer_timeout():
 		time_current_wave+=1
 		time_wave -=1
 		
-		
-#		$HudDatos/TimerText.text = "Next Wave in: " + str(time_wave)
 
+
+# Funcion que retorna un enemigo aleatorio dependiendo el numero que se le dé,
+# num es el maximo numero que va a generar el random
+func chose_enemy(num):
+	var enemy = null
+	var random_value = rand_range(0,num)
+	# enemigo es hormiga si es menor a 1 el random 
+	if random_value <= 1:  
+		enemy = enemy_ant_scene.instance()
+	# enemigo es escarabajo si es mayor a 1 y menor a 2 el random
+	if random_value > 1 && random_value <= 2:
+		enemy = enemy_beetle_scene.instance() 
+	# enemigo es caracol si es mayor a 2 el random
+	if random_value > 2:
+		enemy = enemy_snail_scene.instance()
+	return enemy
 
 #Timer que ejecuta cada oleada
 func _on_PlayWaveTimer_timeout():
