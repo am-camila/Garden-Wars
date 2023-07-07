@@ -72,8 +72,7 @@ func _on_EnemiesTimer_timeout():
 		$HudDatos/WaitEnemyDieTimer.start()
 		return
 	if wave_on:
-		var enemy
-		
+		var enemy		
 		if current_wave < 4:
 			enemy = chose_enemy(1)
 			
@@ -124,7 +123,7 @@ func chose_enemy(num):
 
 #Muestra el texto en pantalla previo a iniciar la oleada
 func see_wave_text():
-	if enemy_count == 0:
+	if enemy_count < 1:
 		player.enemies = []
 		time_current_wave = 0
 		$HudDatos/NumberWaveTimer/NumberWave.show()
@@ -154,6 +153,7 @@ func deleteEnemies():
 
 func _on_enemy_dies():
 	enemy_count -= 1
+
 
 
 func _on_WaitEnemyDieTimer_timeout():
