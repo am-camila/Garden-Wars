@@ -206,6 +206,8 @@ limit_left = 0
 limit_top = -17
 limit_right = 1865
 limit_bottom = 1800
+smoothing_enabled = true
+smoothing_speed = 5.4
 
 [node name="FirePosition" type="Position2D" parent="."]
 position = Vector2( 0, -1 )
