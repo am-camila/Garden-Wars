@@ -24,7 +24,7 @@ var sleep_global_time = 5
 var sleep_wave_timer = 3
 
 #oleada actual
-var current_wave = 1
+var current_wave = 4
 
 #tiempo que dura la oleada
 var time_wave

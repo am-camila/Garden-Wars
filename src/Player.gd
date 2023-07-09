@@ -94,13 +94,16 @@ func fire_at_enemy():
 	if enemies_count == 0:
 		fire_timer.stop()
 	if enemies.size() > 0:
-		near = 1000.0
+		near = 1500.0
 		for elem in enemies:
 			if is_instance_valid(elem):
 				var enemy_distance = position.distance_to(elem.position)
 				if enemy_distance < near:
 					near = enemy_distance
+					if is_instance_valid(target):
+						target.quitarResaltado()
 					target = elem
+					elem.resaltar()
 	if is_instance_valid(target):
 		var proj_instance = projectile_scene.instance()
 		if normal_damage != damage:

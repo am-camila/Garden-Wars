@@ -25,6 +25,8 @@ export (PackedScene) var life_power_up
 onready var powerUps: Array  = [speed_power_up,hit_power_up,life_power_up]
 onready var animated_sprite = get_node("AnimatedSprite")
 
+var actualEnabled = 0.0
+
 func _ready():
 		#animated_sprite.material.set_shader_param("enabled",0.0)
 		max_health = health
@@ -50,7 +52,7 @@ func _on_Area2D_body_entered(body):
 	if body is Projectile:
 		max_health -= player.damage
 		hit_color()
-		speed = speed * 0.55
+		#speed = speed * 0.55
 		$Hit.play()
 		GLOBALS.emit_signal("hit")
 		if max_health < 1:
@@ -67,6 +69,7 @@ func _on_Area2D_body_entered(body):
 func hit_color():
 	animated_sprite.material.set_shader_param("flash_modifier",0.7)
 	animated_sprite.material.set_shader_param("enabled",2.0)
+	actualEnabled = 2.0
 	$FlashTimer.start()
 
 func random_powerUp():
@@ -96,6 +99,13 @@ func _on_CollisionParents_area_exited(area):
 
 func _on_FlashTimer_timeout():
 	animated_sprite.material.set_shader_param("enabled",0.0)
+	actualEnabled = 0.0
 
 func _on_DieTimer_timeout():
 	queue_free()
+
+func resaltar():
+	animated_sprite.material.set_shader_param("enabled",3.0)
+
+func quitarResaltado():
+	animated_sprite.material.set_shader_param("enabled",actualEnabled)

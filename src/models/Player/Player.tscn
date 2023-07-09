@@ -24,6 +24,11 @@ shader_param/sin_offset = 0.0
 shader_param/light_offset = 0.5
 shader_param/flash_color = Color( 1, 0.117647, 0, 1 )
 shader_param/flash_modifier = 0.0
+shader_param/color_line = Color( 1, 1, 1, 1 )
+shader_param/width = 1.0
+shader_param/pattern = 0
+shader_param/inside = false
+shader_param/add_margins = true
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
